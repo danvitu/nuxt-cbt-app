@@ -1,0 +1,3 @@
+<template>
+  КПТ 
+</template>
