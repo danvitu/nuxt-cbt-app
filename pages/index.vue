@@ -1,17 +1,17 @@
 <template>
   <section class="flex justify-between mb-4">
-    <h2 class="text-2xl font-extrabold mb-4">Опрос для определения настроения</h2>
+    <h2 class="text-2xl font-extrabold mb-4"><span class="text-primary">Опрос</span> настроения</h2>
     <div class="space-x-2">
       <UButton icon="i-heroicons-backward" color="white" variant="solid" label="Опросы"
         @click="isLastMoodOpen = true" />
       <UModal v-model="isLastMoodOpen">
         <div class="p-4">
-          <div>Прошлые прохождения опроса</div>
+          <div>Все результаты опроса настроения</div>
           <USkeleton class="h-48" />
         </div>
       </UModal>
 
-      <UButton icon="i-heroicons-plus-circle" variant="solid" label="Добавить" @click="isAddNewMoodOpen = true" />
+      <UButton icon="i-heroicons-plus-circle" variant="solid" label="Пройти опрос" @click="isAddNewMoodOpen = true" />
 
       <!-- Модальное окно добавления опросника настроения  -->
       <UModal v-model="isAddNewMoodOpen">
@@ -23,19 +23,19 @@
             <div class="mb-8">
               <div class="mb-4 font-bold">Тревожные чувства</div>
               <UFormGroup label="Тревога" class="mb-4">
-                <UInput type="number" v-model="state.anx[0]" />
+                <URange color="red" :min="0" :max="5" v-model="state.anx[0]" />
               </UFormGroup>
               <UFormGroup label="Нервозность" class="mb-4">
-                <UInput type="number" v-model="state.anx[1]" />
+                <URange color="red" :min="0" :max="5" v-model="state.anx[1]" />
               </UFormGroup>
               <UFormGroup label="Беспокойство" class="mb-4">
-                <UInput type="number" v-model="state.anx[2]" />
+                <URange color="red" :min="0" :max="5" v-model="state.anx[2]" />
               </UFormGroup>
               <UFormGroup label="Страх или дурное предчувствие" class="mb-4">
-                <UInput type="number" v-model="state.anx[3]" />
+                <URange color="red" :min="0" :max="5" v-model="state.anx[3]" />
               </UFormGroup>
               <UFormGroup label="Напряжение или состояние на грани" class="mb-4">
-                <UInput type="number" v-model="state.anx[4]" />
+                <URange color="red" :min="0" :max="5" v-model="state.anx[4]" />
               </UFormGroup>
               <UDivider label="" />
               <div>Сумма по разделу "Тревожность": {{ anxiousSum }} </div>
@@ -43,34 +43,34 @@
             <div class="mb-8">
               <div class="mb-4 font-bold">Физические симптомы тревоги</div>
               <UFormGroup label="Нерегулярное или учащенное сердцебиение, тахикардия" class="mb-4">
-                <UInput type="number" v-model="state.phy[0]" />
+                <URange color="red" :min="0" :max="5" v-model="state.phy[0]" />
               </UFormGroup>
               <UFormGroup label="Избыточная потливость, приступы холода или жара" class="mb-4">
-                <UInput type="number" v-model="state.phy[1]" />
+                <URange color="red" :min="0" :max="5" v-model="state.phy[1]" />
               </UFormGroup>
               <UFormGroup label="Мелкая или крупная дрожь" class="mb-4">
-                <UInput type="number" v-model="state.phy[2]" />
+                <URange color="red" :min="0" :max="5" v-model="state.phy[2]" />
               </UFormGroup>
               <UFormGroup label="Одышка или затрудненное дыхание" class="mb-4">
-                <UInput type="number" v-model="state.phy[3]" />
+                <URange color="red" :min="0" :max="5" v-model="state.phy[3]" />
               </UFormGroup>
               <UFormGroup label="Чувство удушья" class="mb-4">
-                <UInput type="number" v-model="state.phy[4]" />
+                <URange color="red" :min="0" :max="5" v-model="state.phy[4]" />
               </UFormGroup>
               <UFormGroup label="Боль или стеснение в груди" class="mb-4">
-                <UInput type="number" v-model="state.phy[5]" />
+                <URange color="red" :min="0" :max="5" v-model="state.phy[5]" />
               </UFormGroup>
               <UFormGroup label="«Бабочки в животе», тошнота, расстройство желудка" class="mb-4">
-                <UInput type="number" v-model="state.phy[6]" />
+                <URange color="red" :min="0" :max="5" v-model="state.phy[6]" />
               </UFormGroup>
               <UFormGroup label="Головокружение, потеря равновесия" class="mb-4">
-                <UInput type="number" v-model="state.phy[7]" />
+                <URange color="red" :min="0" :max="5" v-model="state.phy[7]" />
               </UFormGroup>
               <UFormGroup label="Чувство, как будто вы сами или мир вокруг вас нереальны" class="mb-4">
-                <UInput type="number" v-model="state.phy[8]" />
+                <URange color="red" :min="0" :max="5" v-model="state.phy[8]" />
               </UFormGroup>
               <UFormGroup label="Ощущение онемения или покалывания" class="mb-4">
-                <UInput type="number" v-model="state.phy[9]" />
+                <URange color="red" :min="0" :max="5" v-model="state.phy[9]" />
               </UFormGroup>
               <UDivider label="" />
               <div>Сумма по разделу "Физические": {{ physicalSum }} </div>
@@ -78,19 +78,23 @@
             <div class="mb-8">
               <div class="mb-4 font-bold">Депрессия</div>
               <UFormGroup label="Грусть или уныние" class="mb-4">
-                <UInput type="number" v-model="state.dep[0]" />
+                <URange color="red" :min="0" :max="5" v-model="state.dep[0]" />
               </UFormGroup>
               <UFormGroup label="Чувство бессилия или безнадежности" class="mb-4">
-                <UInput type="number" v-model="state.dep[1]" />
+                <URange color="red" :min="0" :max="5" v-model="state.dep[1]" />
+
               </UFormGroup>
               <UFormGroup label="Низкая самооценка" class="mb-4">
-                <UInput type="number" v-model="state.dep[2]" />
+                <URange color="red" :min="0" :max="5" v-model="state.dep[2]" />
+
               </UFormGroup>
               <UFormGroup label="Чувство собственной никчемности или непригодности" class="mb-4">
-                <UInput type="number" v-model="state.dep[3]" />
+                <URange color="red" :min="0" :max="5" v-model="state.dep[3]" />
+
               </UFormGroup>
               <UFormGroup label="Потеря чувства удовольствия и удовлетворенности от жизни" class="mb-4">
-                <UInput type="number" v-model="state.dep[4]" />
+                <URange color="red" :min="0" :max="5" v-model="state.dep[4]" />
+
               </UFormGroup>
               <UDivider label="" />
               <div>Сумма по разделу "Депрессия": {{ depressionSum }} </div>
@@ -98,10 +102,10 @@
             <div class="mb-8">
               <div class="mb-4 font-bold">Суицидальные импульсы</div>
               <UFormGroup label="Есть ли у вас суицидальные мысли?" class="mb-4">
-                <UInput type="number" v-model="state.sui[0]" />
+                <URange color="red" :min="0" :max="5" v-model="state.sui[0]" />
               </UFormGroup>
               <UFormGroup label="Хотели бы вы покончить с собой?" class="mb-4">
-                <UInput type="number" v-model="state.sui[1]" />
+                <URange color="red" :min="0" :max="5" v-model="state.sui[1]" />
               </UFormGroup>
               <UDivider label="" />
               <div>Сумма по разделу "Суицидальные": {{ suicidalSum }} </div>
@@ -134,24 +138,51 @@
 
   <!-- Записи журнала настроения -->
   <section class="flex justify-between mb-4">
-    <h2 class="text-2xl font-extrabold">Все записи</h2>
-    <div>
-      <UButton icon="i-heroicons-plus-circle" variant="solid" label="Добавить" @click="isAddNewJournalOpen = true" />
+    <h2 class="text-2xl font-extrabold"><span class="text-primary">Журнал</span> настроения</h2>
+    <div class="space-x-2">
+      <UButton icon="i-heroicons-backward" color="white" variant="solid" label="Записи"
+        @click="isLastJournalOpen = true" />
+      <UModal v-model="isLastJournalOpen">
+        <div class="p-4">
+          <div>Все записи журнала настроения</div>
+          <JournalEntry v-for="i in 3" :key="i" />
+        </div>
+      </UModal>
     </div>
   </section>
 
   <section>
-    <JournalEntry v-for="i in 3" :key="i" />
+    <UForm :state="stateJournal" @submit="saveJournal">
+      <div class="font-semibold text-xl mb-4">Добавить новую запись в журнал</div>
+      <UFormGroup
+        label="Событие, которое меня расстроило (момент когда почувствовал упадок настроения, беспокойство или панику):"
+        class="mb-6">
+        <UTextarea :rows="2" autoresize />
+      </UFormGroup>
+      <div class="mb-4 font-semibold">Выберите негативные чувства</div>
+      <NegativeFeelings v-for="(feelingsGroup, i) in feelings" :key="i" :feelingsGroup="feelingsGroup" />
+      <div class="mb-4">
+        <div class="mb-4 font-semibold">Запишите негативные мысли</div>
+        <NegativeThoughts class="mb-4" />
+        <NegativeThoughts class="mb-4" />
+        <UButton icon="i-heroicons-plus-circle" label="Добавить мысль" />
+      </div>
+      <UButton icon="i-heroicons-plus-circle" label="Сохранить запись в журнале" />
+    </UForm>
   </section>
 </template>
 
 <script setup>
+import { feelings } from '~/constants';
+
 const isLoading = ref(false)
 const isLastMoodOpen = ref(false)
+const isLastJournalOpen = ref(false)
 const isAddNewMoodOpen = ref(false)
-const isAddNewJournalOpen = ref(false)
+
 const supabase = useSupabaseClient()
 
+// Первоначальная загрузка опросов настроения из Supabase
 const { data: moodEntries } = await useAsyncData('moods', async () => {
   isLoading.value = true
   try {
@@ -162,6 +193,7 @@ const { data: moodEntries } = await useAsyncData('moods', async () => {
   }
 })
 
+// Обновление компонента с записями опроса настроения из Supabase
 const fetchMoods = async () => {
   isLoading.value = true
   try {
@@ -184,6 +216,7 @@ const state = ref({
   sui: []
 })
 
+// Рассчет суммы баллов по каждому из 4х разделов
 const totalSum = (points) => {
   const sum = points.reduce((acc, currentValue) => acc + currentValue, 0);
   return sum
@@ -194,6 +227,7 @@ const physicalSum = computed(() => totalSum(state.value.phy))
 const depressionSum = computed(() => totalSum(state.value.dep))
 const suicidalSum = computed(() => totalSum(state.value.sui))
 
+// Сохранение прохождения опроса настроения в базу
 const saveMood = async () => {
   isLoading.value = true
   try {
@@ -213,5 +247,13 @@ const saveMood = async () => {
   } finally {
     isLoading.value = false
   }
+}
+
+const stateJournal = ref({
+
+})
+
+const saveJournal = async () => {
+
 }
 </script>
