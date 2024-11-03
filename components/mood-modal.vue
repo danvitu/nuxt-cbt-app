@@ -142,10 +142,20 @@ const saveMood = async () => {
       .select()
     isOpen.value = false
     emit('saved')
+    resetForm()
   } catch (e) {
     console.log(e)
   } finally {
     isLoading.value = false
+  }
+}
+
+const resetForm = () => {
+  state.value = {
+    anx: [],
+    phy: [],
+    dep: [],
+    sui: []
   }
 }
 

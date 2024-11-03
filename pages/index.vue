@@ -2,14 +2,6 @@
   <section class="flex justify-between mb-4">
     <h2 class="text-2xl font-extrabold mb-4"><span class="text-primary">Опрос</span> настроения</h2>
     <div class="space-x-2">
-      <UButton icon="i-heroicons-backward" color="white" variant="solid" label="Опросы"
-        @click="isLastMoodOpen = true" />
-      <UModal v-model="isLastMoodOpen">
-        <div class="p-4">
-          <div>Все результаты опроса настроения</div>
-          <USkeleton class="h-48" />
-        </div>
-      </UModal>
       <UButton icon="i-heroicons-plus-circle" variant="solid" label="Пройти опрос" @click="isAddNewMoodOpen = true" />
       <MoodModal v-model:is-open="isAddNewMoodOpen" @saved="refresh()" />
     </div>
@@ -29,7 +21,7 @@
         <USkeleton class="h-12 w-full py-2 border-b" v-for="i in 3" :key="i" />
       </template>
       <template v-else>
-        <MoodEntry v-for="moodEntry in moodEntries" :moodEntry="moodEntry" :key="moodEntry.id" @deleted="refresh()" />
+        <MoodEntry :moodEntries="moodEntries" @deleted="refresh()" />
       </template>
     </div>
   </section>
@@ -67,10 +59,8 @@
 
 <script setup>
 const isLoading = ref(false)
-const isLastMoodOpen = ref(false)
 const isLastJournalOpen = ref(false)
 const isAddNewMoodOpen = ref(false)
-
 const supabase = useSupabaseClient()
 
 // Первоначальная загрузка опросов настроения из Supabase
@@ -97,9 +87,9 @@ const fetchMoods = async () => {
     isLoading.value = false
   }
 }
-
 const refresh = async () => (moodEntries.value = await fetchMoods())
 
+// Журнал настроения
 const stateJournal = ref({
   upsettingEvent: '',
   negativeEmotions: [{
@@ -136,6 +126,8 @@ const stateJournal = ref({
   negativeThoughts: []
 })
 
+
+// Отправка журнала настроения в Supabase
 const saveJournal = async () => {
 
 }
