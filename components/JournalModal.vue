@@ -1,0 +1,143 @@
+<template>
+  <UModal v-model="isOpen" fullscreen>
+    <UCard>
+      <template #header>
+        <div class=" font-bold text-xl">Журнал настроения</div>
+      </template>
+      <UForm :state="stateJournal" @submit="saveJournal">
+        <div class="font-semibold text-xl mb-4">Добавить новую запись в журнал</div>
+        <UFormGroup
+          label="Событие, которое меня расстроило (момент когда почувствовал упадок настроения, беспокойство или панику):"
+          class="mb-6">
+          <UTextarea :rows="2" autoresize v-model="stateJournal.upsettingEvent" />
+        </UFormGroup>
+        <NegativeEmotions v-model:negative-emotions="stateJournal.negativeEmotions" />
+        <NegativeThoughts v-model:negative-thoughts="stateJournal.negativeThoughts" />
+        <div class="">
+          <UButton type="submit" icon="i-heroicons-plus-circle" label="Сохранить журнал" />
+        </div>
+      </UForm>
+    </UCard>
+  </UModal>
+</template>
+
+<script setup>
+const isOpen = defineModel('isOpen')
+const emit = defineEmits(['saved'])
+const supabase = useSupabaseClient()
+const stateJournal = ref({
+  upsettingEvent: null,
+  negativeEmotions: [{
+    emotions: [
+      { name: 'Грусть', isSelected: false },
+      { name: 'Подавленность', isSelected: false },
+      { name: 'Упадок настроения', isSelected: false },
+      { name: 'Печаль', isSelected: false }
+    ],
+    confidenceBefore: 0,
+    confidenceAfter: 0
+  },
+  {
+    emotions: [
+      { name: 'Тревога', isSelected: false },
+      { name: 'Беспокойство', isSelected: false },
+      { name: 'Паника', isSelected: false },
+      { name: 'Нервозность', isSelected: false },
+      { name: 'Страх', isSelected: false },
+    ],
+    confidenceBefore: 0,
+    confidenceAfter: 0
+  },
+  {
+    emotions: [
+      { name: 'Вина', isSelected: false },
+      { name: 'Угрызения совести', isSelected: false },
+      { name: 'Стыд', isSelected: false },
+      { name: 'Сожаление', isSelected: false },
+    ],
+    confidenceBefore: 0,
+    confidenceAfter: 0
+  },
+  {
+    emotions: [
+      { name: 'Чувство собственной неполноценности', isSelected: false },
+      { name: 'Никчемности', isSelected: false },
+      { name: 'Непригодности', isSelected: false },
+      { name: 'Ущербности', isSelected: false },
+      { name: 'Некомпетентности', isSelected: false },
+    ],
+    confidenceBefore: 0,
+    confidenceAfter: 0
+  },
+  {
+    emotions: [
+      { name: 'Одиночество', isSelected: false },
+      { name: 'Никто не любит', isSelected: false },
+      { name: 'Никому не нужен', isSelected: false },
+      { name: 'Чувствую себя отвергнутым', isSelected: false },
+      { name: 'Брошенным', isSelected: false },
+      { name: 'Оставленным', isSelected: false },
+    ],
+    confidenceBefore: 0,
+    confidenceAfter: 0
+  },
+  {
+    emotions: [
+      { name: 'Смущение', isSelected: false },
+      { name: 'Чувствую себя глупо', isSelected: false },
+      { name: 'Унизительно', isSelected: false },
+      { name: 'Зациклен на себе', isSelected: false },
+    ],
+    confidenceBefore: 0,
+    confidenceAfter: 0
+  },
+  {
+    emotions: [
+      { name: 'Безнадежность', isSelected: false },
+      { name: 'Уныние', isSelected: false },
+      { name: 'Пессимизм', isSelected: false },
+      { name: 'Отчаяние', isSelected: false },
+    ],
+    confidenceBefore: 0,
+    confidenceAfter: 0
+  },
+  {
+    emotions: [
+      { name: 'Досада', isSelected: false },
+      { name: 'Чувство тупиковости', isSelected: false },
+      { name: 'Поверженности', isSelected: false },
+      { name: 'Преград на пути', isSelected: false },
+    ],
+    confidenceBefore: 0,
+    confidenceAfter: 0
+  },
+  {
+    emotions: [
+      { name: 'Злость', isSelected: false },
+      { name: 'Гнев', isSelected: false },
+      { name: 'Обида', isSelected: false },
+      { name: 'Раздражение', isSelected: false },
+      { name: 'Рассержен', isSelected: false },
+      { name: 'Расстроен', isSelected: false },
+      { name: 'В бешенстве', isSelected: false },
+
+    ],
+    confidenceBefore: 0,
+    confidenceAfter: 0
+  }],
+  negativeThoughts: []
+})
+
+const saveJournal = async () => {
+  try {
+    const { error } = await supabase
+      .from('journal')
+      .insert(stateJournal.value)
+    if (error) throw new Error
+    emit('saved')
+    isOpen.value = false
+  } catch (e) {
+    console.log(e)
+  }
+}
+</script>

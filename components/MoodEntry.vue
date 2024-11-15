@@ -1,9 +1,9 @@
 <template>
-  <div v-for="moodEntry in moodEntries" :key="moodEntry.id" class="grid grid-cols-6 border-b py-2 items-center">
-    <div class="text-gray-400 text-sm">
+  <div class="grid grid-cols-6 border-b py-2 items-center">
+    <div class="text-gray-400 text-xs md:text-sm">
       {{ new Date(moodEntry.created_at).toLocaleDateString('ru-RU', {
         year: '2-digit',
-        month: 'short',
+        month: '2-digit',
         day: 'numeric',
         hour: '2-digit',
         minute: '2-digit'
@@ -21,7 +21,7 @@
 
 <script setup>
 const props = defineProps({
-  moodEntries: Object
+  moodEntry: Object
 })
 const emit = defineEmits(['deleted'])
 const supabase = useSupabaseClient()
