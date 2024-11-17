@@ -8,7 +8,7 @@
         <MoodModal v-model:is-open="isAddNewMoodOpen" @saved="refreshMood" />
       </div>
     </div>
-    <div class="grid grid-cols-6 text-xs md:font-semibold md:text-base border-b pb-4">
+    <div class="grid grid-cols-6 font-semibold text-base border-b pb-4">
       <div>Дата</div>
       <div>Тревожные чувства</div>
       <div>Физические симптомы</div>
@@ -30,8 +30,8 @@
       <div class="space-x-2">
         <div class="space-x-2">
           <UButton icon="i-heroicons-plus-circle" variant="solid" label="Добавить запись"
-            @click="isAddNewJournalOpen = true" />
-          <JournalModal v-model:is-open="isAddNewJournalOpen" @saved="refreshJournal" />
+            @click="isAddJournalOpen = true" />
+          <JournalModal v-model:is-open="isAddJournalOpen" @saved="refreshJournal" />
         </div>
       </div>
     </div>
@@ -44,13 +44,13 @@
     </template>
     <template v-else>
       <JournalEntry v-for="journalEntry in journalEntries" :journalEntry="journalEntry" :key="journalEntry.id"
-        @deleted="refreshJournal" />
+        @deleted="refreshJournal" @edited="refreshJournal" />
     </template>
   </section>
 </template>
 
 <script setup>
-const isAddNewJournalOpen = ref(false)
+const isAddJournalOpen = ref(false)
 const isAddNewMoodOpen = ref(false)
 const supabase = useSupabaseClient()
 

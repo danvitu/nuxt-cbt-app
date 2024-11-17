@@ -95,6 +95,7 @@ const emit = defineEmits(['saved'])
 const isOpen = defineModel('isOpen')
 const supabase = useSupabaseClient()
 const isPending = ref(false)
+const { toastSuccess, toastError } = useAppToast()
 
 const state = ref({
   anx: [0, 0, 0, 0, 0],
@@ -128,12 +129,12 @@ const saveMood = async () => {
     const { error } = await supabase
       .from('mood')
       .insert(moodState.value)
+    toastSuccess({ title: 'Опрос сохранен' })
     isOpen.value = false
     emit('saved')
-    if (error) throw new Error
     resetForm()
   } catch (e) {
-    console.log(e)
+    toastError({ title: 'Опрос не был сохранен', description: e.message })
   } finally {
     isPending.value = false
   }

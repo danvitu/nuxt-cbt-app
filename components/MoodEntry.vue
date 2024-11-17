@@ -1,12 +1,10 @@
 <template>
   <div class="grid grid-cols-6 border-b py-2 items-center">
-    <div class="text-gray-400 text-xs md:text-sm">
+    <div class="text-gray-400 text-sm">
       {{ new Date(moodEntry.created_at).toLocaleDateString('ru-RU', {
         year: '2-digit',
         month: '2-digit',
         day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
       }) }}
     </div>
     <div>{{ moodEntry.anxious_sum }}</div>
@@ -25,14 +23,16 @@ const props = defineProps({
 })
 const emit = defineEmits(['deleted'])
 const supabase = useSupabaseClient()
+const { toastSuccess, toastError } = useAppToast()
 const deleteEntry = async (id) => {
   try {
     await supabase.from('mood')
       .delete()
       .eq('id', id)
+    toastSuccess({ title: 'Опрос удалён' })
     emit('deleted')
   } catch (e) {
-    console.log(e)
+    toastError({ title: 'Опрос не был удалён', description: e.message })
   }
 }
 const getItems = (id) => [

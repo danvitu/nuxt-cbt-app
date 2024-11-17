@@ -5,7 +5,11 @@
         <div class=" font-bold text-xl">Журнал настроения</div>
       </template>
       <UForm :state="stateJournal" @submit="saveJournal">
-        <div class="font-semibold text-xl mb-4">Добавить новую запись в журнал</div>
+        <div class="font-semibold text-xl mb-4">{{ isEditing ? `Редактировать запись от
+          ${journalEntry.created_at.split('T')[0]}`
+          :
+          'Добавить новую запись' }}
+        </div>
         <UFormGroup
           label="Событие, которое меня расстроило (момент когда почувствовал упадок настроения, беспокойство или панику):"
           class="mb-6">
@@ -14,7 +18,7 @@
         <NegativeEmotions v-model:negative-emotions="stateJournal.negativeEmotions" />
         <NegativeThoughts v-model:negative-thoughts="stateJournal.negativeThoughts" />
         <div class="">
-          <UButton type="submit" icon="i-heroicons-plus-circle" label="Сохранить журнал" />
+          <UButton type="submit" icon="i-heroicons-arrow-down-on-square" label="Сохранить журнал" />
         </div>
       </UForm>
     </UCard>
@@ -22,10 +26,22 @@
 </template>
 
 <script setup>
-const isOpen = defineModel('isOpen')
+const props = defineProps({
+  journalEntry: {
+    type: Object,
+    required: false
+  }
+})
 const emit = defineEmits(['saved'])
+const isOpen = defineModel('isOpen')
 const supabase = useSupabaseClient()
-const stateJournal = ref({
+const { toastSuccess, toastError } = useAppToast()
+const isEditing = computed(() => !!props.journalEntry)
+const initialState = isEditing.value ? {
+  upsettingEvent: props.journalEntry.upsettingEvent,
+  negativeEmotions: props.journalEntry.negativeEmotions,
+  negativeThoughts: props.journalEntry.negativeThoughts
+} : {
   upsettingEvent: null,
   negativeEmotions: [{
     emotions: [
@@ -126,18 +142,26 @@ const stateJournal = ref({
     confidenceAfter: 0
   }],
   negativeThoughts: []
-})
+}
+
+const stateJournal = ref({ ...initialState })
 
 const saveJournal = async () => {
   try {
     const { error } = await supabase
       .from('journal')
-      .insert(stateJournal.value)
-    if (error) throw new Error
+      .upsert({ ...stateJournal.value, id: props.journalEntry?.id })
+    if (error) throw error
     emit('saved')
+    toastSuccess({
+      title: isEditing.value ? 'Запись обновлена' : 'Новая запись сохранена'
+    })
     isOpen.value = false
   } catch (e) {
-    console.log(e)
+    toastError({
+      title: 'Ошибка!',
+      description: e.message
+    })
   }
 }
 </script>
