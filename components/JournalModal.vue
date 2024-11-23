@@ -1,10 +1,10 @@
 <template>
-  <UModal v-model="isOpen" fullscreen>
+  <UModal v-model="isOpen" :ui="{ width: 'sm:max-w-7xl', }">
     <UCard>
       <template #header>
-        <div class=" font-bold text-xl">Журнал настроения</div>
+        <div class="font-bold text-xl">Журнал настроения</div>
       </template>
-      <UForm :state="stateJournal" @submit="saveJournal">
+      <UForm :state="stateJournal" :schema="schema" @submit="saveJournal">
         <div class="font-semibold text-xl mb-4">{{ isEditing ? `Редактировать запись от
           ${journalEntry.created_at.split('T')[0]}`
           :
@@ -12,7 +12,7 @@
         </div>
         <UFormGroup
           label="Событие, которое меня расстроило (момент когда почувствовал упадок настроения, беспокойство или панику):"
-          class="mb-6">
+          name="upsettingEvent" class="mb-6">
           <UTextarea :rows="2" autoresize v-model="stateJournal.upsettingEvent" />
         </UFormGroup>
         <NegativeEmotions v-model:negative-emotions="stateJournal.negativeEmotions" />
@@ -26,6 +26,7 @@
 </template>
 
 <script setup>
+import { z } from 'zod'
 const props = defineProps({
   journalEntry: {
     type: Object,
@@ -42,7 +43,7 @@ const initialState = isEditing.value ? {
   negativeEmotions: props.journalEntry.negativeEmotions,
   negativeThoughts: props.journalEntry.negativeThoughts
 } : {
-  upsettingEvent: null,
+  upsettingEvent: undefined,
   negativeEmotions: [{
     emotions: [
       { name: 'Грусть', isSelected: false },
@@ -141,10 +142,21 @@ const initialState = isEditing.value ? {
     confidenceBefore: 0,
     confidenceAfter: 0
   }],
-  negativeThoughts: []
+  negativeThoughts: [{
+    negativeThought: undefined,
+    confidenceBefore: 0,
+    confindeceAfter: 0,
+    distortionType: [],
+    positiveThought: undefined,
+    confidenceInPositive: 0
+  }]
 }
 
-const stateJournal = ref({ ...initialState })
+const stateJournal = ref(JSON.parse(JSON.stringify(initialState)))
+
+const schema = z.object({
+  upsettingEvent: z.string().min(5, { message: "Введите более 5 символов" }),
+})
 
 const saveJournal = async () => {
   try {
@@ -157,6 +169,7 @@ const saveJournal = async () => {
       title: isEditing.value ? 'Запись обновлена' : 'Новая запись сохранена'
     })
     isOpen.value = false
+    if (!isEditing.value) stateJournal.value = JSON.parse(JSON.stringify(initialState))
   } catch (e) {
     toastError({
       title: 'Ошибка!',

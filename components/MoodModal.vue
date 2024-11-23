@@ -26,61 +26,61 @@
         </div>
         <div class="mb-8">
           <UDivider class="mb-4" :ui="{ label: 'text-base font-bold' }" label="Физические симптомы тревоги" />
-          <UFormGroup label="Нерегулярное или учащенное сердцебиение, тахикардия" class="mb-4">
+          <UFormGroup :label="`Нерегулярное или учащенное сердцебиение, тахикардия: ${state.phy[0]}`" class="mb-4">
             <URange :min="0" :max="5" v-model="state.phy[0]" />
           </UFormGroup>
-          <UFormGroup label="Избыточная потливость, приступы холода или жара" class="mb-4">
+          <UFormGroup :label="`Избыточная потливость, приступы холода или жара: ${state.phy[1]}`" class="mb-4">
             <URange :min="0" :max="5" v-model="state.phy[1]" />
           </UFormGroup>
-          <UFormGroup label="Мелкая или крупная дрожь" class="mb-4">
+          <UFormGroup :label="`Мелкая или крупная дрожь: ${state.phy[2]}`" class=" mb-4">
             <URange :min="0" :max="5" v-model="state.phy[2]" />
           </UFormGroup>
-          <UFormGroup label="Одышка или затрудненное дыхание" class="mb-4">
+          <UFormGroup :label="`Одышка или затрудненное дыхание: ${state.phy[3]}`" class="mb-4">
             <URange :min="0" :max="5" v-model="state.phy[3]" />
           </UFormGroup>
-          <UFormGroup label="Чувство удушья" class="mb-4">
+          <UFormGroup :label="`Чувство удушья: ${state.phy[4]}`" class="mb-4">
             <URange :min="0" :max="5" v-model="state.phy[4]" />
           </UFormGroup>
-          <UFormGroup label="Боль или стеснение в груди" class="mb-4">
+          <UFormGroup :label="`Боль или стеснение в груди: ${state.phy[5]} `" class="mb-4">
             <URange :min="0" :max="5" v-model="state.phy[5]" />
           </UFormGroup>
-          <UFormGroup label="«Бабочки в животе», тошнота, расстройство желудка" class="mb-4">
+          <UFormGroup :label="`«Бабочки в животе», тошнота, расстройство желудка: ${state.phy[6]}`" class="mb-4">
             <URange :min="0" :max="5" v-model="state.phy[6]" />
           </UFormGroup>
-          <UFormGroup label="Головокружение, потеря равновесия" class="mb-4">
+          <UFormGroup :label="`Головокружение, потеря равновесия: ${state.phy[7]}`" class="mb-4">
             <URange :min="0" :max="5" v-model="state.phy[7]" />
           </UFormGroup>
-          <UFormGroup label="Чувство, как будто вы сами или мир вокруг вас нереальны" class="mb-4">
+          <UFormGroup :label="`Чувство, как будто вы сами или мир вокруг вас нереальны: ${state.phy[8]}`" class="mb-4">
             <URange :min="0" :max="5" v-model="state.phy[8]" />
           </UFormGroup>
-          <UFormGroup label="Ощущение онемения или покалывания" class="mb-4">
+          <UFormGroup :label="`Ощущение онемения или покалывания: ${state.phy[9]}`" class="mb-4">
             <URange :min="0" :max="5" v-model="state.phy[9]" />
           </UFormGroup>
         </div>
         <div class="mb-8">
           <div class="mb-4 font-bold">Депрессия</div>
-          <UFormGroup label="Грусть или уныние" class="mb-4">
+          <UFormGroup :label="`Грусть или уныние: ${state.dep[0]}`" class="mb-4">
             <URange :min="0" :max="5" v-model="state.dep[0]" />
           </UFormGroup>
-          <UFormGroup label="Чувство бессилия или безнадежности" class="mb-4">
+          <UFormGroup :label="`Чувство бессилия или безнадежности: ${state.dep[1]}`" class="mb-4">
             <URange :min="0" :max="5" v-model="state.dep[1]" />
           </UFormGroup>
-          <UFormGroup label="Низкая самооценка" class="mb-4">
+          <UFormGroup :label="`Низкая самооценка: ${state.dep[2]}`" class="mb-4">
             <URange :min="0" :max="5" v-model="state.dep[2]" />
           </UFormGroup>
-          <UFormGroup label="Чувство собственной никчемности или непригодности" class="mb-4">
+          <UFormGroup :label="`Чувство собственной никчемности или непригодности: ${state.dep[3]}`" class="mb-4">
             <URange :min="0" :max="5" v-model="state.dep[3]" />
           </UFormGroup>
-          <UFormGroup label="Потеря чувства удовольствия и удовлетворенности от жизни" class="mb-4">
+          <UFormGroup :label="`Потеря чувства удовольствия и удовлетворенности от жизни: ${state.dep[4]}`" class="mb-4">
             <URange :min="0" :max="5" v-model="state.dep[4]" />
           </UFormGroup>
         </div>
         <div class="mb-8">
           <div class="mb-4 font-bold">Суицидальные импульсы</div>
-          <UFormGroup label="Есть ли у вас суицидальные мысли?" class="mb-4">
+          <UFormGroup :label="`Есть ли у вас суицидальные мысли: ${state.sui[0]}`" class="mb-4">
             <URange :min="0" :max="5" v-model="state.sui[0]" />
           </UFormGroup>
-          <UFormGroup label="Хотели бы вы покончить с собой?" class="mb-4">
+          <UFormGroup :label="`Хотели бы вы покончить с собой: ${state.sui[1]}`" class="mb-4">
             <URange :min="0" :max="5" v-model="state.sui[1]" />
           </UFormGroup>
         </div>
@@ -97,12 +97,14 @@ const supabase = useSupabaseClient()
 const isPending = ref(false)
 const { toastSuccess, toastError } = useAppToast()
 
-const state = ref({
+const initialState = {
   anx: [0, 0, 0, 0, 0],
-  phy: [],
-  dep: [],
-  sui: []
-})
+  phy: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  dep: [0, 0, 0, 0, 0],
+  sui: [0, 0]
+}
+
+const state = ref(JSON.parse(JSON.stringify(initialState)))
 
 // Рассчет суммы баллов по каждому из 4х разделов
 const totalSum = (points) => {
@@ -110,17 +112,12 @@ const totalSum = (points) => {
   return sum
 }
 
-const anxiousSum = computed(() => totalSum(state.value.anx))
-const physicalSum = computed(() => totalSum(state.value.phy))
-const depressionSum = computed(() => totalSum(state.value.dep))
-const suicidalSum = computed(() => totalSum(state.value.sui))
-
-const moodState = ref({
-  anxious_sum: anxiousSum,
-  physical_sum: physicalSum,
-  depression_sum: depressionSum,
-  suicidal_sum: suicidalSum,
-})
+const moodsSum = computed(() => ({
+  anxious_sum: totalSum(state.value.anx),
+  physical_sum: totalSum(state.value.phy),
+  depression_sum: totalSum(state.value.dep),
+  suicidal_sum: totalSum(state.value.sui),
+}));
 
 // Сохранение прохождения опроса настроения в базу
 const saveMood = async () => {
@@ -128,7 +125,7 @@ const saveMood = async () => {
   try {
     const { error } = await supabase
       .from('mood')
-      .insert(moodState.value)
+      .insert(moodsSum.value)
     toastSuccess({ title: 'Опрос сохранен' })
     isOpen.value = false
     emit('saved')
@@ -141,12 +138,7 @@ const saveMood = async () => {
 }
 
 const resetForm = () => {
-  state.value = {
-    anx: [0, 0, 0, 0, 0],
-    phy: [],
-    dep: [],
-    sui: []
-  }
+  state.value = JSON.parse(JSON.stringify(initialState))
 }
 
 </script>

@@ -3,7 +3,7 @@
   <section class="mb-12">
     <div class="flex justify-between mb-4">
       <h2 class="text-2xl font-extrabold mb-4"><span class="text-primary">Опрос</span> настроения</h2>
-      <div class="space-x-2">
+      <div>
         <UButton icon="i-heroicons-plus-circle" variant="solid" label="Пройти опрос" @click="isAddNewMoodOpen = true" />
         <MoodModal v-model:is-open="isAddNewMoodOpen" @saved="refreshMood" />
       </div>
@@ -27,15 +27,13 @@
   <section class="mb-12">
     <div class="flex justify-between mb-4">
       <h2 class="text-2xl font-extrabold mb-4"><span class="text-primary">Журнал</span> настроения</h2>
-      <div class="space-x-2">
-        <div class="space-x-2">
-          <UButton icon="i-heroicons-plus-circle" variant="solid" label="Добавить запись"
-            @click="isAddJournalOpen = true" />
-          <JournalModal v-model:is-open="isAddJournalOpen" @saved="refreshJournal" />
-        </div>
+      <div>
+        <UButton icon="i-heroicons-plus-circle" variant="solid" label="Добавить запись"
+          @click="isAddJournalOpen = true" />
+        <JournalModal v-model:is-open="isAddJournalOpen" @saved="refreshJournal" />
       </div>
     </div>
-    <div class="grid grid-cols-6 text-xs md:font-semibold md:text-base border-b pb-4">
+    <div class="grid grid-cols-6 font-semibold border-b pb-4">
       <div>Дата</div>
       <div class="col-span-5">Запись журнала настроения</div>
     </div>

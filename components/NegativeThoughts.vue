@@ -2,7 +2,7 @@
   <div class="mb-4 font-semibold">Запишите негативные мысли</div>
   <div v-for="(thought, index) in negativeThoughts" :key="index" class="mb-8 pb-8 border-b">
     <div class="space-y-4">
-      <UFormGroup :label="`Негативная мысль #${index + 1}`">
+      <UFormGroup :label="`Негативная мысль #${index + 1}`" name="negativeThought">
         <UTextarea v-model="thought.negativeThought" />
       </UFormGroup>
       <div class="flex space-x-4">

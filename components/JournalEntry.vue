@@ -1,11 +1,7 @@
 <template>
   <div class="grid grid-cols-6 border-b py-2 items-center">
     <div class="text-gray-400 text-sm">
-      {{ new Date(journalEntry.created_at).toLocaleDateString('ru-RU', {
-        year: '2-digit',
-        month: '2-digit',
-        day: 'numeric',
-      }) }}
+      {{ formatDate(journalEntry.created_at) }}
     </div>
     <div class="col-span-4">{{ journalEntry.upsettingEvent }}</div>
     <UDropdown :items="items">
