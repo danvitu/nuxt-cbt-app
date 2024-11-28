@@ -6,14 +6,35 @@
         <UTextarea v-model="thought.negativeThought" />
       </UFormGroup>
       <div class="flex space-x-4">
-        <UFormGroup label="До (%)">
+        <UFormGroup label="До (%)" name="confidenceBefore">
           <UInput v-model.number="thought.confidenceBefore" type="number" class="w-20" />
         </UFormGroup>
-        <UFormGroup label="После (%)">
-          <UInput v-model.number="thought.confindeceAfter" type="number" class="w-20" />
+        <UFormGroup label="После (%)" name="confidenceAfter">
+          <UInput v-model.number="thought.confidenceAfter" type="number" class="w-20" />
         </UFormGroup>
       </div>
-      <UFormGroup label="Выберите когнитивные искажения">
+      <UFormGroup name="distortionOptions">
+        <template #label>
+          <div class="flex items-center">
+            <div>Выберите когнитивные искажения
+            </div>
+            <UButton color="white" variant="ghost" label="" trailing-icon="i-heroicons-information-circle"
+              @click="isDistortionsOpen = true" />
+            <UModal v-model="isDistortionsOpen">
+              <UCard>
+                <template #header>
+                  <h2 class="font-bold text-xl">Проверочный список когнитивных искажений</h2>
+                </template>
+                <div class="space-y-4 max-w-xl text-sm">
+                  <div v-for="distortion in distortions">
+                    <div class="font-bold">{{ distortion.distortionName }}</div>
+                    <div>{{ distortion.distortionDescription }}</div>
+                  </div>
+                </div>
+              </UCard>
+            </UModal>
+          </div>
+        </template>
         <USelectMenu v-model="thought.distortionType" multiple :options="distortionOptions" class="md:w-1/2">
           <template #label>
             <span v-if="thought.distortionType.length" class="truncate">Выбрано: {{ thought.distortionType.length
@@ -22,18 +43,46 @@
           </template>
         </USelectMenu>
       </UFormGroup>
+
       <div>
         <div class="mb-2">Выбранные когнитивные искажения:</div>
         <div class="space-y-2">
-          <div v-for="distortion in thought.distortionType" class="text-sm border px-2 py-1 rounded-md w-max">
-            {{ distortion }}
-          </div>
+          <template v-if="thought.distortionType.length">
+            <div v-for="distortion in thought.distortionType" class="text-sm border px-2 py-1 rounded-md w-max">
+              {{ distortion }}
+            </div>
+          </template>
+          <div v-else class="text-sm">Не выбрано ни одного искажения</div>
         </div>
       </div>
-      <UFormGroup label="Позитивная мысль">
+      <UFormGroup label="Позитивная мысль" name="positiveThought">
+        <template #label>
+          <div class="flex items-center">
+            <div>Позитивная мысль
+            </div>
+            <UButton color="white" variant="ghost" label="" trailing-icon="i-heroicons-information-circle"
+              @click="isTechnicsOpen = true" />
+            <UModal v-model="isTechnicsOpen">
+              <UCard>
+                <template #header>
+                  <h2 class="font-bold text-xl">40 способов справиться со страхами</h2>
+                </template>
+                <div class="max-w-xl text-sm">
+                  <div v-for="model in techniques" class="mb-8 space-y-4">
+                    <h3 class="font-bold text-xl">{{ model.modelName }}</h3>
+                    <div v-for="category in model.categories">
+                      <h3 class="font-semibold">{{ category.categoryName }}</h3>
+                      <div v-for="technique in category.techniques">{{ technique }}</div>
+                    </div>
+                  </div>
+                </div>
+              </UCard>
+            </UModal>
+          </div>
+        </template>
         <UTextarea v-model="thought.positiveThought" />
       </UFormGroup>
-      <UFormGroup label="Убежденность после (%)">
+      <UFormGroup label="Убежденность после (%)" name="confidenceInPositive">
         <UInput v-model.number="thought.confidenceInPositive" type="number" class="w-20" />
       </UFormGroup>
       <div class="flex justify-end pt-4">
@@ -45,13 +94,16 @@
 </template>
 
 <script setup>
-import { distortionOptions } from '~/constants';
+import { techniques, distortions } from '~/constants';
+const distortionOptions = distortions.map((distortion) => distortion.distortionName)
+const isDistortionsOpen = ref(false)
+const isTechnicsOpen = ref(false)
 const negativeThoughts = defineModel('negativeThoughts')
 const addThought = () => {
   negativeThoughts.value.push({
     negativeThought: '',
     confidenceBefore: 0,
-    confindeceAfter: 0,
+    confidenceAfter: 0,
     distortionType: [],
     positiveThought: '',
     confidenceInPositive: 0

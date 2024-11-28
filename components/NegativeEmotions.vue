@@ -18,7 +18,6 @@
       </UFormGroup>
     </div>
   </div>
-
 </template>
 
 <script setup>

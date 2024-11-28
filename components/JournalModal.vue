@@ -1,8 +1,11 @@
 <template>
-  <UModal v-model="isOpen" :ui="{ width: 'sm:max-w-7xl', }">
+  <UModal v-model="isOpen" :ui="{ width: 'sm:max-w-5xl' }">
     <UCard>
       <template #header>
-        <div class="font-bold text-xl">Журнал настроения</div>
+        <div class="flex items-center justify-between">
+          <h3 class="font-bold text-xl">Журнал настроения</h3>
+          <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" @click="isOpen = false" />
+        </div>
       </template>
       <UForm :state="stateJournal" :schema="schema" @submit="saveJournal">
         <div class="font-semibold text-xl mb-4">{{ isEditing ? `Редактировать запись от
@@ -17,7 +20,7 @@
         </UFormGroup>
         <NegativeEmotions v-model:negative-emotions="stateJournal.negativeEmotions" />
         <NegativeThoughts v-model:negative-thoughts="stateJournal.negativeThoughts" />
-        <div class="">
+        <div>
           <UButton type="submit" icon="i-heroicons-arrow-down-on-square" label="Сохранить журнал" />
         </div>
       </UForm>
@@ -26,7 +29,6 @@
 </template>
 
 <script setup>
-import { z } from 'zod'
 const props = defineProps({
   journalEntry: {
     type: Object,
@@ -145,7 +147,7 @@ const initialState = isEditing.value ? {
   negativeThoughts: [{
     negativeThought: undefined,
     confidenceBefore: 0,
-    confindeceAfter: 0,
+    confidenceAfter: 0,
     distortionType: [],
     positiveThought: undefined,
     confidenceInPositive: 0
@@ -154,9 +156,7 @@ const initialState = isEditing.value ? {
 
 const stateJournal = ref(JSON.parse(JSON.stringify(initialState)))
 
-const schema = z.object({
-  upsettingEvent: z.string().min(5, { message: "Введите более 5 символов" }),
-})
+const { simpleSchema: schema } = formSchema()
 
 const saveJournal = async () => {
   try {

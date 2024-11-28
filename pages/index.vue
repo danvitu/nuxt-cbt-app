@@ -1,8 +1,8 @@
 <template>
   <!-- Опросник настроения -->
   <section class="mb-12">
-    <div class="flex justify-between mb-4">
-      <h2 class="text-2xl font-extrabold mb-4"><span class="text-primary">Опрос</span> настроения</h2>
+    <div class="flex justify-between mb-8">
+      <h2 class="text-2xl font-extrabold"><span class="text-primary">Опрос</span> настроения</h2>
       <div>
         <UButton icon="i-heroicons-plus-circle" variant="solid" label="Пройти опрос" @click="isAddNewMoodOpen = true" />
         <MoodModal v-model:is-open="isAddNewMoodOpen" @saved="refreshMood" />

@@ -3,7 +3,8 @@
     <div class="text-gray-400 text-sm">
       {{ formatDate(journalEntry.created_at) }}
     </div>
-    <div class="col-span-4">{{ journalEntry.upsettingEvent }}</div>
+    <div class="col-span-4 cursor-pointer" @click="isEditJournalOpen = true">{{ journalEntry.upsettingEvent }}
+    </div>
     <UDropdown :items="items">
       <UButton color="white" variant="ghost" trailing-icon="i-heroicons-ellipsis-horizontal" />
       <JournalModal v-model:is-open="isEditJournalOpen" :journalEntry="journalEntry" @saved="emit('edited')" />
