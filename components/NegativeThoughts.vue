@@ -23,7 +23,11 @@
             <UModal v-model="isDistortionsOpen">
               <UCard>
                 <template #header>
-                  <h2 class="font-bold text-xl">Проверочный список когнитивных искажений</h2>
+                  <div class="flex">
+                    <h2 class="font-bold text-xl">Проверочный список когнитивных искажений</h2>
+                    <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid"
+                      @click="isDistortionsOpen = false" />
+                  </div>
                 </template>
                 <div class="space-y-4 max-w-xl text-sm">
                   <div v-for="distortion in distortions">
@@ -43,7 +47,6 @@
           </template>
         </USelectMenu>
       </UFormGroup>
-
       <div>
         <div class="mb-2">Выбранные когнитивные искажения:</div>
         <div class="space-y-2">
@@ -65,7 +68,11 @@
             <UModal v-model="isTechnicsOpen">
               <UCard>
                 <template #header>
-                  <h2 class="font-bold text-xl">40 способов справиться со страхами</h2>
+                  <div class="flex">
+                    <h2 class="font-bold text-xl">40 способов справиться со страхами</h2>
+                    <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid"
+                      @click="isTechnicsOpen = false" />
+                  </div>
                 </template>
                 <div class="max-w-xl text-sm">
                   <div v-for="model in techniques" class="mb-8 space-y-4">
@@ -86,11 +93,11 @@
         <UInput v-model.number="thought.confidenceInPositive" type="number" class="w-20" />
       </UFormGroup>
       <div class="flex justify-end pt-4">
-        <UButton @click="deleteThought(index)" color="gray">Удалить мысль</UButton>
+        <UButton @click="deleteThought(index)" color="red" icon="i-heroicons-trash" />
       </div>
     </div>
   </div>
-  <UButton @click="addThought" class="mb-4">Добавить новую мысль</UButton>
+  <UButton @click="addThought" class="mb-4" icon="i-heroicons-plus-circle">Добавить новую мысль</UButton>
 </template>
 
 <script setup>

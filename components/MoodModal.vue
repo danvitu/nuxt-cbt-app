@@ -106,7 +106,7 @@
             <URange :min="0" :max="4" v-model="state.sui[1]" />
           </UFormGroup>
         </div>
-        <UButton type="submit" variant="solid" label="Отправить" />
+        <UButton type="submit" variant="solid" label="Отправить" :loading="isLoading" />
       </UForm>
     </UCard>
   </UModal>
@@ -116,7 +116,7 @@
 const emit = defineEmits(['saved'])
 const isOpen = defineModel('isOpen')
 const supabase = useSupabaseClient()
-const isPending = ref(false)
+const isLoading = ref(false)
 const { toastSuccess, toastError } = useAppToast()
 
 const initialState = {
@@ -144,19 +144,23 @@ const moodsSum = computed(() => ({
 
 // Сохранение прохождения опроса настроения в базу
 const saveMood = async () => {
-  isPending.value = true
+  isLoading.value = true
   try {
     const { error } = await supabase
       .from('mood')
       .insert(moodsSum.value)
+    if (error) throw error
+    emit('saved')
     toastSuccess({ title: 'Опрос сохранен' })
     isOpen.value = false
-    emit('saved')
     resetForm()
   } catch (e) {
-    toastError({ title: 'Опрос не был сохранен', description: e.message })
+    toastError({
+      title: 'Опрос не был сохранен',
+      description: e.message
+    })
   } finally {
-    isPending.value = false
+    isLoading.value = false
   }
 }
 

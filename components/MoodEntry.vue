@@ -1,16 +1,18 @@
 <template>
-  <div class="grid grid-cols-6 border-b py-2 items-center">
-    <div class="text-gray-400 text-sm">
+  <div class="border-b">
+    <!-- <div class="text-gray-400 text-xs flex items-center gap-2">
       {{ formatDate(moodEntry.created_at) }}
+    </div> -->
+    <div class="grid grid-cols-5 py-2 items-center">
+      <div>{{ moodEntry.anxious_sum }}</div>
+      <div>{{ moodEntry.physical_sum }}</div>
+      <div>{{ moodEntry.depression_sum }}</div>
+      <div>{{ suicidalSum }}</div>
+      <UDropdown :items="items">
+        <UButton color="white" variant="ghost" icon="i-heroicons-ellipsis-horizontal" :loading="isLoading" />
+        <MoodResultModal v-model:is-open="isResultModalOpen" :moodEntry="moodEntry" />
+      </UDropdown>
     </div>
-    <div>{{ moodEntry.anxious_sum }}</div>
-    <div>{{ moodEntry.physical_sum }}</div>
-    <div>{{ moodEntry.depression_sum }}</div>
-    <div>{{ suicidalSum }}</div>
-    <UDropdown :items="items">
-      <UButton color="white" variant="ghost" trailing-icon="i-heroicons-ellipsis-horizontal" />
-      <MoodResultModal v-model:is-open="isResultModalOpen" :moodEntry="moodEntry" />
-    </UDropdown>
   </div>
 </template>
 
@@ -23,15 +25,23 @@ const emit = defineEmits(['deleted'])
 const isResultModalOpen = ref(false)
 const supabase = useSupabaseClient()
 const { toastSuccess, toastError } = useAppToast()
+const isLoading = ref(false)
 const deleteEntry = async () => {
+  isLoading.value = true
   try {
-    await supabase.from('mood')
+    const { error } = await supabase.from('mood')
       .delete()
       .eq('id', props.moodEntry.id)
+    if (error) throw error
     toastSuccess({ title: 'Опрос удалён' })
     emit('deleted', props.moodEntry.id)
   } catch (e) {
-    toastError({ title: 'Опрос не был удалён', description: e.message })
+    toastError({
+      title: 'Опрос не был удалён',
+      description: e.message
+    })
+  } finally {
+    isLoading.value = false
   }
 }
 

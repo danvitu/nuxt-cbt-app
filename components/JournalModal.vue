@@ -21,7 +21,8 @@
         <NegativeEmotions v-model:negative-emotions="stateJournal.negativeEmotions" />
         <NegativeThoughts v-model:negative-thoughts="stateJournal.negativeThoughts" />
         <div>
-          <UButton type="submit" icon="i-heroicons-arrow-down-on-square" label="Сохранить журнал" />
+          <UButton type="submit" icon="i-heroicons-arrow-down-on-square" label="Сохранить журнал"
+            :loading="isLoading" />
         </div>
       </UForm>
     </UCard>
@@ -40,6 +41,7 @@ const isOpen = defineModel('isOpen')
 const supabase = useSupabaseClient()
 const { toastSuccess, toastError } = useAppToast()
 const isEditing = computed(() => !!props.journalEntry)
+const isLoading = ref(false)
 const initialState = isEditing.value ? {
   upsettingEvent: props.journalEntry.upsettingEvent,
   negativeEmotions: props.journalEntry.negativeEmotions,
@@ -159,11 +161,14 @@ const stateJournal = ref(JSON.parse(JSON.stringify(initialState)))
 const { simpleSchema: schema } = formSchema()
 
 const saveJournal = async () => {
+  isLoading.value = true
   try {
     const { error } = await supabase
       .from('journal')
       .upsert({ ...stateJournal.value, id: props.journalEntry?.id })
-    if (error) throw error
+    if (error) {
+      throw error
+    }
     emit('saved')
     toastSuccess({
       title: isEditing.value ? 'Запись обновлена' : 'Новая запись сохранена'
@@ -172,9 +177,11 @@ const saveJournal = async () => {
     if (!isEditing.value) stateJournal.value = JSON.parse(JSON.stringify(initialState))
   } catch (e) {
     toastError({
-      title: 'Ошибка!',
+      title: 'Ошибка при сохранении журнала',
       description: e.message
     })
+  } finally {
+    isLoading.value = false
   }
 }
 </script>

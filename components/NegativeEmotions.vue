@@ -3,10 +3,9 @@
   <div v-for="(group, groupIndex) in negativeEmotions" :key="groupIndex" class="mb-4 border-b">
     <div class="flex flex-wrap gap-2 mb-4">
       <div v-for="(emotion, index) in group.emotions" :key="emotion.name" :class="{ selected: emotion.isSelected }"
-        class="px-2 py-1 rounded-md cursor-pointer border hover:bg-slate-500 hover:text-white"
-        @click="toggleEmotion(groupIndex, emotion.name)">
-        <div v-if="index === 0" class="font-bold">{{ emotion.name }}</div>
-        <div v-else>{{ emotion.name }}</div>
+        class="px-2 py-1 rounded-md cursor-pointer border" @click="toggleEmotion(groupIndex, emotion.name)">
+        <div v-if="index === 0" class="font-bold text-sm md:text-base">{{ emotion.name }}</div>
+        <div v-else class="text-sm md:text-base">{{ emotion.name }}</div>
       </div>
     </div>
     <div class="flex space-x-4 mb-4">
@@ -30,6 +29,6 @@ const toggleEmotion = (groupIndex, emotionName) => {
 
 <style>
 .selected {
-  @apply bg-slate-500 text-white
+  @apply bg-slate-700 text-white dark:bg-slate-300 dark:text-black
 }
 </style>
