@@ -4,4 +4,9 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@nuxt/ui", "@nuxtjs/supabase", "@nuxt/image"],
   supabase: { redirect: true },
+  runtimeConfig: {
+    public: {
+      baseUrl: process.env.BASE_URL ?? "http://localhost:3000",
+    },
+  },
 })
