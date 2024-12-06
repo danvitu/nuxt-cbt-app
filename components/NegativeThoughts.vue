@@ -1,6 +1,6 @@
 <template>
   <div class="mb-4 font-semibold">Запишите негативные мысли</div>
-  <div v-for="(thought, index) in negativeThoughts" :key="index" class="mb-8 pb-8 border-b">
+  <div v-for="(thought, index) in negativeThoughts" :key="index" class="mb-4 pb-8 border-b">
     <div class="space-y-4">
       <UFormGroup :label="`Негативная мысль #${index + 1}`" name="negativeThought">
         <UTextarea v-model="thought.negativeThought" />
@@ -23,7 +23,7 @@
             <UModal v-model="isDistortionsOpen">
               <UCard>
                 <template #header>
-                  <div class="flex">
+                  <div class="flex justify-between">
                     <h2 class="font-bold text-xl">Проверочный список когнитивных искажений</h2>
                     <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid"
                       @click="isDistortionsOpen = false" />
@@ -68,7 +68,7 @@
             <UModal v-model="isTechnicsOpen">
               <UCard>
                 <template #header>
-                  <div class="flex">
+                  <div class="flex justify-between">
                     <h2 class="font-bold text-xl">40 способов справиться со страхами</h2>
                     <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid"
                       @click="isTechnicsOpen = false" />
@@ -92,12 +92,15 @@
       <UFormGroup label="Убежденность после (%)" name="confidenceInPositive">
         <UInput v-model.number="thought.confidenceInPositive" type="number" class="w-20" />
       </UFormGroup>
-      <div class="flex justify-end pt-4">
-        <UButton @click="deleteThought(index)" color="red" icon="i-heroicons-trash" />
+      <div class="flex justify-end">
+        <UButton @click="deleteThought(index)" color="red" variant="outline" icon="i-heroicons-trash" />
       </div>
     </div>
   </div>
-  <UButton @click="addThought" class="mb-4" icon="i-heroicons-plus-circle">Добавить новую мысль</UButton>
+  <div class="border-b mb-4">
+    <UButton @click="addThought" variant="outline" icon="i-heroicons-plus-circle" class="mb-4">Добавить негативную мысль
+    </UButton>
+  </div>
 </template>
 
 <script setup>

@@ -5,10 +5,12 @@
     </div>
     <div class="col-span-3 cursor-pointer" @click="isEditJournalOpen = true">{{ journalEntry.upsettingEvent }}
     </div>
-    <UDropdown :items="items">
-      <UButton color="white" variant="ghost" icon="i-heroicons-ellipsis-horizontal" :loading="isLoading" />
+    <div class="flex justify-end">
+      <UButton icon="i-heroicons-pencil-square-20-solid" color="primary" variant="ghost" :trailing="false"
+        @click="isEditJournalOpen = true" />
+      <UButton icon="i-heroicons-trash-20-solid" color="red" square variant="ghost" @click="deleteJournalEntry" />
       <JournalModal v-model:is-open="isEditJournalOpen" :journalEntry="journalEntry" @saved="emit('edited')" />
-    </UDropdown>
+    </div>
   </div>
 </template>
 <script setup>
@@ -41,19 +43,4 @@ const deleteJournalEntry = async () => {
     isLoading.value = false
   }
 }
-
-const items = [
-  [
-    {
-      label: 'Редактировать',
-      icon: 'i-heroicons-pencil-square-20-solid',
-      click: () => isEditJournalOpen.value = true
-    },
-    {
-      label: 'Удалить',
-      icon: 'i-heroicons-trash-20-solid',
-      click: deleteJournalEntry
-    }
-  ]
-]
 </script>

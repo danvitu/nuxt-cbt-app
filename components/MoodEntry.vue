@@ -8,10 +8,12 @@
       <div>{{ moodEntry.physical_sum }}</div>
       <div>{{ moodEntry.depression_sum }}</div>
       <div>{{ suicidalSum }}</div>
-      <UDropdown :items="items">
-        <UButton color="white" variant="ghost" icon="i-heroicons-ellipsis-horizontal" :loading="isLoading" />
-        <MoodResultModal v-model:is-open="isResultModalOpen" :moodEntry="moodEntry" />
-      </UDropdown>
+      <div class="flex justify-end">
+        <UButton icon="i-heroicons-eye" color="primary" variant="ghost" :trailing="false"
+          @click="isResultModalOpen = true" />
+        <UButton icon="i-heroicons-trash-20-solid" color="red" square variant="ghost" @click="deleteEntry" />
+      </div>
+      <MoodResultModal v-model:is-open="isResultModalOpen" :moodEntry="moodEntry" />
     </div>
   </div>
 </template>
@@ -44,19 +46,4 @@ const deleteEntry = async () => {
     isLoading.value = false
   }
 }
-
-const items = [
-  [
-    {
-      label: 'Результат',
-      icon: 'i-heroicons-academic-cap',
-      click: () => isResultModalOpen.value = true,
-    },
-    {
-      label: 'Удалить',
-      icon: 'i-heroicons-trash-20-solid',
-      click: deleteEntry
-    },
-  ]
-]
 </script>

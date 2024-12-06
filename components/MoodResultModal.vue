@@ -33,7 +33,6 @@
         </div>
         <div v-else>Суицидальные импульсы отсутствуют</div>
       </div>
-
     </UCard>
   </UModal>
 </template>

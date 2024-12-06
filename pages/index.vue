@@ -1,13 +1,13 @@
 <template>
   <!-- Опросник настроения -->
   <section class="mb-12">
-    <div class="flex justify-between items-center mb-8">
+    <div class="flex justify-between mb-8">
       <div>
         <h2 class="text-2xl"><span class="text-primary">Опрос</span> настроения</h2>
-        <div class="flex gap-2 text-sm mt-4">
-          <div>Недавние записи</div>
-          <UToggle v-model="showMoodEntriesNumber" />
-          <div>Все записи</div>
+        <div class="flex gap-2 text-xs mt-4">
+          <div :class="{ 'opacity-20': showMoodEntriesNumber }">Недавние</div>
+          <UToggle size="sm" :ui="{ active: 'bg-slate-500 dark:bg-slate-400' }" v-model="showMoodEntriesNumber" />
+          <div :class="{ 'opacity-20': !showMoodEntriesNumber }">Все записи</div>
         </div>
       </div>
       <div>
@@ -32,13 +32,13 @@
 
   <!-- Записи журнала настроения -->
   <section class="mb-12">
-    <div class="flex justify-between mb-8 items-center">
+    <div class="flex justify-between mb-8">
       <div>
         <h2 class="text-2xl"><span class="text-primary">Журнал</span> настроения</h2>
-        <div class="flex gap-2 text-sm mt-4">
-          <div>Недавние записи</div>
-          <UToggle v-model="showJournalEntriesNumber" />
-          <div>Все записи</div>
+        <div class="flex gap-2 text-xs mt-4">
+          <div :class="{ 'opacity-20': showJournalEntriesNumber }">Недавние</div>
+          <UToggle size="sm" v-model="showJournalEntriesNumber" :ui="{ active: 'bg-slate-500 dark:bg-slate-400' }" />
+          <div :class="{ 'opacity-20': !showJournalEntriesNumber }">Все записи</div>
         </div>
       </div>
       <div>
@@ -66,7 +66,7 @@ const isAddNewMoodOpen = ref(false)
 const showMoodEntriesNumber = ref(false)
 const showJournalEntriesNumber = ref(false)
 const supabase = useSupabaseClient()
-const { toastSuccess, toastError } = useAppToast()
+const { toastError } = useAppToast()
 
 // Загрузка опросов настроения из Supabase
 const { data: moodEntries, refresh: refreshMood, status: statusMood } = await useAsyncData('moods', async () => {

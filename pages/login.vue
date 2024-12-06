@@ -35,7 +35,7 @@ const state = ref({
 
 const schema = z.object({
   email: z.string().email('Неверно введён email'),
-  password: z.string().min(8, 'Пароль должен содержать минимум 8 символов')
+  password: z.string().min(6, 'Пароль должен содержать минимум 6 символов')
 })
 
 const signInWithPassword = async () => {
