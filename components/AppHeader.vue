@@ -39,7 +39,7 @@ const items = [
   }], [{
     label: 'Настройки',
     icon: 'i-heroicons-cog-8-tooth',
-    click: () => navigateTo('/app/settings')
+    click: () => toastSuccess({ title: 'Настройки будут доступны позднее' })
   }, {
     label: 'Выйти',
     icon: 'i-heroicons-arrow-left-on-rectangle',

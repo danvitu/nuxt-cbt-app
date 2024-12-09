@@ -1,23 +1,25 @@
 <template>
   <div class="mx-auto max-w-xl">
-    <div class="mb-4 space-y-2">
-      <h1 class="font-semibold text-xl">Создайте новый аккаунт</h1>
-      <h2 class="text-sm">Или <NuxtLink to=" /login" class="underline font-semibold">войдите в
-          существующий
-        </NuxtLink>
-      </h2>
-    </div>
-    <UForm :state="state" :schema="schema" @submit="signUpWithPassword" class="space-y-4">
-      <UFormGroup label="Email" name="email">
-        <UInput v-model="state.email" />
-      </UFormGroup>
-      <UFormGroup label="Пароль" name="password">
-        <UInput v-model="state.password" type="password" />
-      </UFormGroup>
-      <UButton type="submit" :loading="isLoading">
-        Регистрация
-      </UButton>
-    </UForm>
+    <UCard>
+      <div class="mb-4 space-y-2">
+        <h1 class="font-semibold text-xl">Создайте новый аккаунт</h1>
+        <h2 class="text-sm">Или <NuxtLink to=" /login" class="underline font-semibold">войдите в
+            существующий
+          </NuxtLink>
+        </h2>
+      </div>
+      <UForm :state="state" :schema="schema" @submit="signUpWithPassword" class="space-y-4">
+        <UFormGroup label="Email" name="email">
+          <UInput v-model="state.email" />
+        </UFormGroup>
+        <UFormGroup label="Пароль" name="password">
+          <UInput v-model="state.password" type="password" />
+        </UFormGroup>
+        <UButton type="submit" :loading="isLoading">
+          Регистрация
+        </UButton>
+      </UForm>
+    </UCard>
   </div>
 </template>
 
