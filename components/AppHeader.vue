@@ -1,6 +1,10 @@
 <template>
   <header class="flex justify-between items-center mt-8 mb-8">
-    <NuxtLink to="/" class="text-2xl font-semibold">КПТ <span class="text-primary">Ассистент</span></NuxtLink>
+    <NuxtLink to="/" class="text-2xl font-semibold">КПТ <span class="text-primary">Ассистент</span>
+    </NuxtLink>
+    <div class="space-x-4 font-mono">
+      <NuxtLink v-if="!user" to="/login">Войти</NuxtLink>
+    </div>
     <UDropdown v-if="user" :items="items" :ui="{ item: { disabled: 'cursor-text select-text' }, width: 'w-64' }"
       :popper="{ placement: 'bottom-start' }">
       <UAvatar src="https://avatar.iran.liara.run/public" icon="i-heroicons-photo" alt="Avatar" />
@@ -35,11 +39,7 @@ const items = [
   }], [{
     label: 'Настройки',
     icon: 'i-heroicons-cog-8-tooth',
-    click: () => toastSuccess({ title: 'Скорость здесь будут настройки' })
-  }, {
-    label: 'Руководство',
-    icon: 'i-heroicons-book-open',
-    click: () => toastSuccess({ title: 'Скорость здесь будет руководство по работе с приложением' })
+    click: () => navigateTo('/app/settings')
   }, {
     label: 'Выйти',
     icon: 'i-heroicons-arrow-left-on-rectangle',

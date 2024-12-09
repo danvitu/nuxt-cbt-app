@@ -8,7 +8,8 @@
     <div class="flex justify-end">
       <UButton icon="i-heroicons-pencil-square-20-solid" color="primary" variant="ghost" :trailing="false"
         @click="isEditJournalOpen = true" />
-      <UButton icon="i-heroicons-trash-20-solid" color="red" square variant="ghost" @click="deleteJournalEntry" />
+      <UButton icon="i-heroicons-trash-20-solid" color="red" square variant="ghost" @click="deleteJournalEntry"
+        :loading="isLoading" />
       <JournalModal v-model:is-open="isEditJournalOpen" :journalEntry="journalEntry" @saved="emit('edited')" />
     </div>
   </div>

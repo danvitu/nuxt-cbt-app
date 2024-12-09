@@ -11,7 +11,8 @@
       <div class="flex justify-end">
         <UButton icon="i-heroicons-eye" color="primary" variant="ghost" :trailing="false"
           @click="isResultModalOpen = true" />
-        <UButton icon="i-heroicons-trash-20-solid" color="red" square variant="ghost" @click="deleteEntry" />
+        <UButton icon="i-heroicons-trash-20-solid" color="red" square variant="ghost" @click="deleteEntry"
+          :loading="isLoading" />
       </div>
       <MoodResultModal v-model:is-open="isResultModalOpen" :moodEntry="moodEntry" />
     </div>
@@ -22,8 +23,8 @@
 const props = defineProps({
   moodEntry: Object
 })
-const suicidalSum = computed(() => props.moodEntry.suicidal_1 + props.moodEntry.suicidal_2)
 const emit = defineEmits(['deleted'])
+const suicidalSum = computed(() => props.moodEntry.suicidal_1 + props.moodEntry.suicidal_2)
 const isResultModalOpen = ref(false)
 const supabase = useSupabaseClient()
 const { toastSuccess, toastError } = useAppToast()

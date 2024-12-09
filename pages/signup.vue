@@ -1,12 +1,13 @@
 <template>
   <div class="mx-auto max-w-xl">
     <div class="mb-4 space-y-2">
-      <h1 class="font-semibold text-xl">Войдите в свой аккаунт</h1>
-      <h2 class="text-sm ">Или <NuxtLink to="/signup" class="underline font-semibold">создайте новый
+      <h1 class="font-semibold text-xl">Создайте новый аккаунт</h1>
+      <h2 class="text-sm">Или <NuxtLink to=" /login" class="underline font-semibold">войдите в
+          существующий
         </NuxtLink>
       </h2>
     </div>
-    <UForm :state="state" :schema="schema" @submit="signInWithPassword" class="space-y-4">
+    <UForm :state="state" :schema="schema" @submit="signUpWithPassword" class="space-y-4">
       <UFormGroup label="Email" name="email">
         <UInput v-model="state.email" />
       </UFormGroup>
@@ -14,7 +15,7 @@
         <UInput v-model="state.password" type="password" />
       </UFormGroup>
       <UButton type="submit" :loading="isLoading">
-        Войти
+        Регистрация
       </UButton>
     </UForm>
   </div>
@@ -35,19 +36,19 @@ const schema = z.object({
   password: z.string().min(6, 'Пароль должен содержать минимум 6 символов')
 })
 
-const signInWithPassword = async () => {
+const signUpWithPassword = async () => {
   isLoading.value = true
   try {
-    const { error } = await supabase.auth.signInWithPassword({
+    const { error } = await supabase.auth.signUp({
       email: state.value.email,
       password: state.value.password
     })
     if (error) throw error
-    toastSuccess({ title: 'Вы успешно авторизованы' })
-    navigateTo('/app')
+    toastSuccess({ title: 'Вы успешно создали новый аккаунт' })
+    navigateTo('/login')
   } catch (e) {
     toastError({
-      title: 'Ошибка при авторизации',
+      title: 'Ошибка при регистрации',
       description: e.message
     })
   } finally {

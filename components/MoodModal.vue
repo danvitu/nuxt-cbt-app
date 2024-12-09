@@ -2,7 +2,7 @@
   <UModal v-model="isOpen">
     <UCard>
       <template #header>
-        <div class="flex items-center justify-between">
+        <div class="flex justify-between">
           <div class="flex items-center gap-1">
             <h3 class="font-bold text-xl">Опрос настроения</h3>
             <UPopover mode="hover">
@@ -146,11 +146,12 @@ const moodsSum = computed(() => ({
 const saveMood = async () => {
   isLoading.value = true
   try {
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from('mood')
       .insert(moodsSum.value)
+      .select()
     if (error) throw error
-    emit('saved')
+    emit('saved', data[0])
     toastSuccess({ title: 'Опрос сохранен' })
     isOpen.value = false
     resetForm()
@@ -167,5 +168,4 @@ const saveMood = async () => {
 const resetForm = () => {
   state.value = JSON.parse(JSON.stringify(initialState))
 }
-
 </script>

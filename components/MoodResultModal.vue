@@ -2,7 +2,10 @@
   <UModal v-model="isOpen">
     <UCard>
       <template #header>
-        <h3 class="font-semibold">Интерпретация результатов опросника от {{ formatDate(moodEntry.created_at) }}</h3>
+        <div class="flex justify-between">
+          <h3 class="font-semibold">Интерпретация результатов опросника от {{ formatDate(moodEntry.created_at) }}</h3>
+          <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" @click="isOpen = false" />
+        </div>
       </template>
       <div v-for="result in totalResult" class="mb-4">
         <h3 class="font-semibold">{{ result.resultName }}</h3>

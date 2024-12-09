@@ -2,7 +2,7 @@
   <UModal v-model="isOpen" :ui="{ width: 'sm:max-w-4xl' }">
     <UCard>
       <template #header>
-        <div class="flex items-center justify-between">
+        <div class="flex justify-between">
           <h3 class="font-bold text-xl">Журнал настроения</h3>
           <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" @click="isOpen = false" />
         </div>
