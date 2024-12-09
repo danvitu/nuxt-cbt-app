@@ -1,6 +1,6 @@
 <template>
   <header class="flex justify-between items-center mt-8 mb-8">
-    <NuxtLink to="/" class="text-2xl font-semibold">КПТ <span class="text-primary">Ассистент</span>
+    <NuxtLink :to="!user ? '/' : '/app'" class="text-2xl font-semibold">КПТ <span class="text-primary">Ассистент</span>
     </NuxtLink>
     <div class="space-x-4 font-mono">
       <NuxtLink v-if="!user" to="/login">Войти</NuxtLink>
