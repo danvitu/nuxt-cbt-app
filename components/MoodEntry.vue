@@ -1,21 +1,20 @@
 <template>
   <div class="border-b">
-    <!-- <div class="text-gray-400 text-xs flex items-center gap-2">
-      {{ formatDate(moodEntry.created_at) }}
-    </div> -->
-    <div class="grid grid-cols-5 py-2 items-center">
+    <div class="grid sm:grid-cols-6 grid-cols-5 py-2 items-center gap-4">
+      <div class="text-slate-400 md:text-sm text-xs hidden sm:block">{{ formatDate(moodEntry.created_at) }}</div>
       <div>{{ moodEntry.anxious_sum }}</div>
       <div>{{ moodEntry.physical_sum }}</div>
       <div>{{ moodEntry.depression_sum }}</div>
       <div>{{ suicidalSum }}</div>
-      <div class="flex justify-end">
-        <UButton icon="i-heroicons-eye" color="primary" variant="ghost" :trailing="false"
+      <div class="flex justify-end gap-1">
+        <UButton icon="i-heroicons-eye" color="primary" variant="soft" :trailing="false"
           @click="isResultModalOpen = true" />
-        <UButton icon="i-heroicons-trash-20-solid" color="red" square variant="ghost" @click="deleteEntry"
+        <UButton icon="i-heroicons-trash-20-solid" color="red" square variant="soft" @click="deleteEntry"
           :loading="isLoading" />
       </div>
       <MoodResultModal v-model:is-open="isResultModalOpen" :moodEntry="moodEntry" />
     </div>
+    <div class="block sm:hidden text-xs text-right text-slate-400">{{ formatDate(moodEntry.created_at) }}</div>
   </div>
 </template>
 

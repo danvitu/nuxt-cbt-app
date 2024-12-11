@@ -1,11 +1,9 @@
 <template>
-  <div class="mx-auto max-w-xl">
-    <UCard>
+  <div class="flex-1 flex justify-center items-center">
+    <UCard class="w-full max-w-xl">
       <div class="mb-4 space-y-2">
         <h1 class="font-semibold text-xl">Создайте новый аккаунт</h1>
-        <h2 class="text-sm">Или <NuxtLink to=" /login" class="underline font-semibold">войдите в
-            существующий
-          </NuxtLink>
+        <h2 class="text-sm">Или <NuxtLink to="/login" class="underline font-semibold">войдите в существующий</NuxtLink>
         </h2>
       </div>
       <UForm :state="state" :schema="schema" @submit="signUpWithPassword" class="space-y-4">
@@ -20,6 +18,7 @@
         </UButton>
       </UForm>
     </UCard>
+
   </div>
 </template>
 

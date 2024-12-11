@@ -4,8 +4,8 @@
       <template #header>
         <div class="flex justify-between">
           <div class="flex items-center gap-1">
-            <h3 class="font-bold text-xl">Опрос настроения</h3>
-            <UPopover mode="hover">
+            <h3 class="font-bold text-xl">Опрос для определения настроения</h3>
+            <UPopover>
               <UButton color="white" variant="ghost" label="" trailing-icon="i-heroicons-information-circle" />
               <template #panel>
                 <div class="p-4 max-w-xl">

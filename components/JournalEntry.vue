@@ -1,14 +1,17 @@
 <template>
-  <div class="grid grid-cols-5 border-b py-2 items-center">
-    <div class="text-gray-400 text-sm">
+  <div class="grid sm:grid-cols-6 grid-cols-4 border-b py-2 items-center gap-4">
+    <div class="text-gray-400 md:text-sm text-xs">
       {{ formatDate(journalEntry.created_at) }}
     </div>
-    <div class="col-span-3 cursor-pointer" @click="isEditJournalOpen = true">{{ journalEntry.upsettingEvent }}
+    <div class="sm:col-span-4 col-span-2 cursor-pointer overflow-hidden text-ellipsis line-clamp-2"
+      @click="isEditJournalOpen = true">
+      {{
+        journalEntry.upsettingEvent }}
     </div>
-    <div class="flex justify-end">
-      <UButton icon="i-heroicons-pencil-square-20-solid" color="primary" variant="ghost" :trailing="false"
+    <div class="flex justify-end gap-1">
+      <UButton icon="i-heroicons-pencil-square-20-solid" color="primary" variant="soft" :trailing="false"
         @click="isEditJournalOpen = true" />
-      <UButton icon="i-heroicons-trash-20-solid" color="red" square variant="ghost" @click="deleteJournalEntry"
+      <UButton icon="i-heroicons-trash-20-solid" color="red" square variant="soft" @click="deleteJournalEntry"
         :loading="isLoading" />
       <JournalModal v-model:is-open="isEditJournalOpen" :journalEntry="journalEntry" @saved="emit('edited')" />
     </div>

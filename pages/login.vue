@@ -1,6 +1,6 @@
 <template>
-  <div class="max-w-xl mx-auto">
-    <UCard>
+  <div class="flex-1 flex justify-center items-center">
+    <UCard class="w-full max-w-xl">
       <div class="mb-4 space-y-2">
         <h1 class="font-semibold text-xl">Войдите в свой аккаунт</h1>
         <h2 class="text-sm ">Или <NuxtLink to="/signup" class="underline font-semibold">создайте новый

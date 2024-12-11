@@ -20,7 +20,7 @@
             </div>
             <UButton color="white" variant="ghost" label="" trailing-icon="i-heroicons-information-circle"
               @click="isDistortionsOpen = true" />
-            <UModal v-model="isDistortionsOpen">
+            <UModal v-model="isDistortionsOpen" prevent-close>
               <UCard>
                 <template #header>
                   <div class="flex justify-between">
@@ -65,7 +65,7 @@
             </div>
             <UButton color="white" variant="ghost" label="" trailing-icon="i-heroicons-information-circle"
               @click="isTechnicsOpen = true" />
-            <UModal v-model="isTechnicsOpen">
+            <UModal v-model="isTechnicsOpen" prevent-close>
               <UCard>
                 <template #header>
                   <div class="flex justify-between">
