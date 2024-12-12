@@ -15,7 +15,8 @@
           <JournalModal v-model:is-open="isAddJournalOpen" @saved="refreshJournal" />
         </div>
       </div>
-      <div v-if="limitedJournalEntries.length !== 0" class="grid sm:grid-cols-6 grid-cols-4 font-semibold pb-4 gap-4">
+      <div v-if="limitedJournalEntries.length !== 0"
+        class="grid sm:grid-cols-6 grid-cols-4 font-semibold pb-2 gap-4 sm:text-base text-sm">
         <div>Дата</div>
         <div class="sm:col-span-4 col-span-2">Запись журнала настроения</div>
       </div>
