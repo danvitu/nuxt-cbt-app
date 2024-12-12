@@ -9,16 +9,13 @@
         </p>
       </div>
       <div v-if="!user" class="flex justify-center gap-4">
-        <NuxtLink to="/login">
-          <UButton size="xl" variant="soft">Войти</UButton>
-        </NuxtLink>
-        <NuxtLink to="/signup">
-          <UButton size="xl" variant="solid">Зарегистрироваться</UButton>
+        <NuxtLink to="/about">
+          <UButton size="xl" variant="soft">О приложении</UButton>
         </NuxtLink>
       </div>
       <div v-else class="flex justify-center gap-4">
         <NuxtLink to="/app">
-          <UButton>Перейти в приложение</UButton>
+          <UButton size="xl">Перейти в приложение</UButton>
         </NuxtLink>
       </div>
     </div>

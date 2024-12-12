@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-4 font-semibold">Выберите негативные эмоции</div>
+  <div class="mb-4 font-semibold">Выберите и оцените негативные эмоции</div>
   <div v-for="(group, groupIndex) in negativeEmotions" :key="groupIndex" class="mb-4 border-b">
     <div class="flex flex-wrap gap-2 mb-4">
       <div v-for="(emotion, index) in group.emotions" :key="emotion.name" :class="{ selected: emotion.isSelected }"
@@ -8,7 +8,7 @@
         <div v-else class="text-sm md:text-base">{{ emotion.name }}</div>
       </div>
     </div>
-    <div class="flex space-x-4 mb-4">
+    <div class="flex gap-4 mb-4">
       <UFormGroup label="До (%)" class="w-20" name="confidenceBefore">
         <UInput v-model.number="group.confidenceBefore" type="number" />
       </UFormGroup>
