@@ -2,18 +2,18 @@
   <div class="mb-4 font-semibold">Запишите негативные мысли</div>
   <div v-for="(thought, index) in negativeThoughts" :key="index" class="mb-4 pb-8 border-b">
     <div class="space-y-4">
-      <UFormGroup :label="`Негативная мысль #${index + 1}`" name="negativeThought">
+      <UFormGroup :label="`Негативная мысль #${index + 1}`" :name="`negativeThoughts.${index}.negativeThought`">
         <UTextarea v-model="thought.negativeThought" />
       </UFormGroup>
       <div class="flex space-x-4">
-        <UFormGroup label="До (%)" name="confidenceBefore">
+        <UFormGroup label="До (%)" :name="`negativeThoughts.${index}.confidenceBefore`">
           <UInput v-model.number="thought.confidenceBefore" type="number" class="w-20" />
         </UFormGroup>
-        <UFormGroup label="После (%)" name="confidenceAfter">
+        <UFormGroup label="После (%)" :name="`negativeThoughts.${index}.confidenceAfter`">
           <UInput v-model.number="thought.confidenceAfter" type="number" class="w-20" />
         </UFormGroup>
       </div>
-      <UFormGroup name="distortionOptions">
+      <UFormGroup :name="`negativeThoughts.${index}.distortionType`">
         <template #label>
           <div class="flex items-center">
             <div>Выберите когнитивные искажения
@@ -58,7 +58,7 @@
           <div v-else class="text-sm">Не выбрано ни одного искажения</div>
         </div>
       </div>
-      <UFormGroup label="Позитивная мысль" name="positiveThought">
+      <UFormGroup label="Позитивная мысль" :name="`negativeThoughts.${index}.positiveThought`">
         <template #label>
           <div class="flex items-center">
             <div>Позитивная мысль
@@ -89,7 +89,7 @@
         </template>
         <UTextarea v-model="thought.positiveThought" />
       </UFormGroup>
-      <UFormGroup label="Убежденность после (%)" name="confidenceInPositive">
+      <UFormGroup label="Убежденность после (%)" :name="`negativeThoughts.${index}.confidenceInPositive`">
         <UInput v-model.number="thought.confidenceInPositive" type="number" class="w-20" />
       </UFormGroup>
       <div class="flex justify-end">

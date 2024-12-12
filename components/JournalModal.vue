@@ -155,11 +155,8 @@ const initialState = isEditing.value ? {
     confidenceInPositive: 0
   }]
 }
-
 const stateJournal = ref(JSON.parse(JSON.stringify(initialState)))
-
-const { simpleSchema: schema } = formSchema()
-
+const { schema } = formSchema()
 const saveJournal = async () => {
   isLoading.value = true
   try {

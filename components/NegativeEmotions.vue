@@ -9,10 +9,10 @@
       </div>
     </div>
     <div class="flex gap-4 mb-4">
-      <UFormGroup label="До (%)" class="w-20" name="confidenceBefore">
+      <UFormGroup label="До (%)" class="w-20" :name="`negativeEmotions.${groupIndex}.confidenceBefore`">
         <UInput v-model.number="group.confidenceBefore" type="number" />
       </UFormGroup>
-      <UFormGroup label="После (%)" class="w-20" name="confidenceAfter">
+      <UFormGroup label="После (%)" class="w-20" :name="`negativeEmotions.${groupIndex}.confidenceAfter`">
         <UInput v-model.number="group.confidenceAfter" type="number" />
       </UFormGroup>
     </div>
@@ -27,7 +27,7 @@ const toggleEmotion = (groupIndex, emotionName) => {
 }
 </script>
 
-<style>
+<style scoped>
 .selected {
   @apply bg-slate-700 text-white dark:bg-slate-300 dark:text-black
 }
