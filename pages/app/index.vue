@@ -95,9 +95,6 @@ const { data: moodEntries, refresh: refreshMood, status: statusMood } = await us
     })
     return []
   }
-}, {
-  server: true, // Запрашивать данные на сервере
-  initialCache: false // Отключить повторное использование данных
 })
 
 // Загрузка журналов настроения из Supabase
@@ -115,9 +112,6 @@ const { data: journalEntries, refresh: refreshJournal, status: statusJournal } =
     })
     return []
   }
-}, {
-  server: true, // Запрашивать данные на сервере
-  initialCache: false // Отключить повторное использование данных
 })
 const limitedMoodEntries = computed(() => showMoodEntriesNumber.value ? moodEntries.value : moodEntries.value.slice(0, 5))
 const limitedJournalEntries = computed(() => showJournalEntriesNumber.value ? journalEntries.value : journalEntries.value.slice(0, 5))
