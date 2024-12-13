@@ -95,7 +95,10 @@ const { data: moodEntries, refresh: refreshMood, status: statusMood } = await us
     })
     return []
   }
-}, { initialCache: false })
+}, {
+  server: true, // Запрашивать данные на сервере
+  initialCache: false // Отключить повторное использование данных
+})
 
 // Загрузка журналов настроения из Supabase
 const { data: journalEntries, refresh: refreshJournal, status: statusJournal } = await useAsyncData('journal', async () => {
@@ -112,7 +115,10 @@ const { data: journalEntries, refresh: refreshJournal, status: statusJournal } =
     })
     return []
   }
-}, { initialCache: false })
+}, {
+  server: true, // Запрашивать данные на сервере
+  initialCache: false // Отключить повторное использование данных
+})
 const limitedMoodEntries = computed(() => showMoodEntriesNumber.value ? moodEntries.value : moodEntries.value.slice(0, 5))
 const limitedJournalEntries = computed(() => showJournalEntriesNumber.value ? journalEntries.value : journalEntries.value.slice(0, 5))
 </script>
