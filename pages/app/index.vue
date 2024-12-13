@@ -75,11 +75,6 @@ const showMoodEntriesNumber = ref(false)
 const showJournalEntriesNumber = ref(false)
 const supabase = useSupabaseClient()
 const { toastError } = useAppToast()
-
-import { useRobotsRule } from '#imports'
-const rule = useRobotsRule()
-rule.value = 'noindex, nofollow'
-
 useSeoMeta({
   title: "Приложение"
 })

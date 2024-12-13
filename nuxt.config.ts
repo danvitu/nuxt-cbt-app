@@ -17,6 +17,9 @@ export default defineNuxtConfig({
     description: "Эффективный инструмент для работы со страхами и тревогами",
     defaultLocale: "ru",
   },
+  robots: {
+    disallow: ["/app"],
+  },
   runtimeConfig: {
     public: {
       baseUrl: process.env.BASE_URL ?? "http://localhost:3000",
