@@ -78,6 +78,10 @@ const { toastError } = useAppToast()
 useSeoMeta({
   title: "Приложение"
 })
+import { useRobotsRule } from '#imports'
+
+const rule = useRobotsRule()
+rule.value = 'noindex, nofollow'
 
 // Загрузка опросов настроения из Supabase
 const { data: moodEntries, refresh: refreshMood, status: statusMood } = await useAsyncData('moods', async () => {
