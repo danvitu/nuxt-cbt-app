@@ -80,7 +80,6 @@ useSeoMeta({
   robots: 'noindex, follow'
 })
 
-
 // Загрузка опросов настроения из Supabase
 const { data: moodEntries, refresh: refreshMood, status: statusMood } = await useAsyncData('moods', async () => {
   try {

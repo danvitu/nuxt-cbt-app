@@ -8,7 +8,7 @@
       </NuxtLink>
       <UDropdown v-if="user" :items="items" :ui="{ item: { disabled: 'cursor-text select-text' }, width: 'w-64' }"
         :popper="{ placement: 'bottom-start' }">
-        <UAvatar src="https://avatar.iran.liara.run/public" icon="i-heroicons-photo" alt="Avatar" />
+        <UAvatar src="/images/uifaces-popular-image.jpg" icon="i-heroicons-user-solid" alt="user avatar" />
         <template #account>
           <div class="text-left">
             <p>
