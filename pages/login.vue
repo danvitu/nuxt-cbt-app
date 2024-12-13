@@ -33,6 +33,10 @@ const state = ref({
   password: undefined
 })
 
+useSeoMeta({
+  title: "Войти"
+})
+
 const schema = z.object({
   email: z.string().email('Неверно введён email'),
   password: z.string().min(6, 'Пароль должен содержать минимум 6 символов')

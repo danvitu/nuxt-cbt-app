@@ -16,9 +16,9 @@
         </div>
       </div>
       <div v-if="limitedJournalEntries.length !== 0"
-        class="grid sm:grid-cols-6 grid-cols-4 font-semibold pb-2 gap-4 sm:text-base text-sm">
+        class="grid sm:grid-cols-6 grid-cols-5 font-semibold pb-2 gap-4 sm:text-base text-sm">
         <div>Дата</div>
-        <div class="sm:col-span-4 col-span-2">Запись журнала настроения</div>
+        <div class="sm:col-span-4 col-span-3">Запись журнала настроения</div>
       </div>
       <div v-if="statusJournal === 'pending'">
         <USkeleton class="h-12 w-full py-2 border-b" v-for="i in journalEntries.length" :key="i" />
@@ -75,6 +75,14 @@ const showMoodEntriesNumber = ref(false)
 const showJournalEntriesNumber = ref(false)
 const supabase = useSupabaseClient()
 const { toastError } = useAppToast()
+
+import { useRobotsRule } from '#imports'
+const rule = useRobotsRule()
+rule.value = 'noindex, nofollow'
+
+useSeoMeta({
+  title: "Приложение"
+})
 
 // Загрузка опросов настроения из Supabase
 const { data: moodEntries, refresh: refreshMood, status: statusMood } = await useAsyncData('moods', async () => {

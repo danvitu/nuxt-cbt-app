@@ -1,9 +1,9 @@
 <template>
-  <div class="grid sm:grid-cols-6 grid-cols-4 border-b py-2 items-center gap-4">
+  <div class="grid sm:grid-cols-6 grid-cols-5 border-b py-2 items-center gap-4">
     <div class="text-gray-400 md:text-sm text-xs">
       {{ formatDate(journalEntry.created_at) }}
     </div>
-    <div class="sm:col-span-4 col-span-2 cursor-pointer overflow-hidden text-ellipsis line-clamp-2"
+    <div class="sm:col-span-4 col-span-3 cursor-pointer overflow-hidden text-ellipsis line-clamp-2"
       @click="isEditJournalOpen = true">
       {{
         journalEntry.upsettingEvent }}

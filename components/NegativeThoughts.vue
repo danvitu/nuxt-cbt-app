@@ -5,12 +5,12 @@
       <UFormGroup :label="`Негативная мысль #${index + 1}`" :name="`negativeThoughts.${index}.negativeThought`">
         <UTextarea v-model="thought.negativeThought" />
       </UFormGroup>
-      <div class="flex space-x-4">
-        <UFormGroup label="До (%)" :name="`negativeThoughts.${index}.confidenceBefore`">
-          <UInput v-model.number="thought.confidenceBefore" type="number" class="w-20" />
+      <div class="flex gap-4">
+        <UFormGroup label="До (%)" :name="`negativeThoughts.${index}.confidenceBefore`" class="w-24">
+          <UInput v-model.number="thought.confidenceBefore" type="number" />
         </UFormGroup>
-        <UFormGroup label="После (%)" :name="`negativeThoughts.${index}.confidenceAfter`">
-          <UInput v-model.number="thought.confidenceAfter" type="number" class="w-20" />
+        <UFormGroup label="После (%)" :name="`negativeThoughts.${index}.confidenceAfter`" class="w-24">
+          <UInput v-model.number="thought.confidenceAfter" type="number" />
         </UFormGroup>
       </div>
       <UFormGroup :name="`negativeThoughts.${index}.distortionType`">

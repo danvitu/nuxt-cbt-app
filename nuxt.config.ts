@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
-  modules: ["@nuxt/ui", "@nuxtjs/supabase", "@nuxt/image"],
+  modules: ["@nuxt/ui", "@nuxtjs/supabase", "@nuxt/image", "@nuxtjs/seo"],
   supabase: {
     redirect: true,
     redirectOptions: {
@@ -10,6 +10,12 @@ export default defineNuxtConfig({
       callback: "",
       exclude: ["/", "/signup", "/about"],
     },
+  },
+  site: {
+    url: process.env.BASE_URL,
+    name: "КПТ Дневник",
+    description: "Эффективный инструмент для работы со страхами и тревогами",
+    defaultLocale: "ru",
   },
   runtimeConfig: {
     public: {

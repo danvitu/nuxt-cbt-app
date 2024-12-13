@@ -19,4 +19,7 @@
 
 <script setup>
 const user = useSupabaseUser()
+useSeoMeta({
+  title: "О приложении"
+})
 </script>

@@ -9,9 +9,6 @@
 
 <script setup>
 useHead({
-  htmlAttrs: {
-    lang: 'ru'
-  },
   link: [
     {
       rel: 'icon',

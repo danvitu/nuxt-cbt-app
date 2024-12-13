@@ -9,10 +9,10 @@
       </div>
     </div>
     <div class="flex gap-4 mb-4">
-      <UFormGroup label="До (%)" class="w-20" :name="`negativeEmotions.${groupIndex}.confidenceBefore`">
+      <UFormGroup label="До (%)" :name="`negativeEmotions.${groupIndex}.confidenceBefore`" class="w-24">
         <UInput v-model.number="group.confidenceBefore" type="number" />
       </UFormGroup>
-      <UFormGroup label="После (%)" class="w-20" :name="`negativeEmotions.${groupIndex}.confidenceAfter`">
+      <UFormGroup label="После (%)" :name="`negativeEmotions.${groupIndex}.confidenceAfter`" class="w-24">
         <UInput v-model.number="group.confidenceAfter" type="number" />
       </UFormGroup>
     </div>
