@@ -2,10 +2,8 @@
   <div>Настройки</div>
 </template>
 <script setup>
-defineRouteRules({
-  robots: false,
-})
 useSeoMeta({
-  title: "Настройки"
+  title: "Настройки",
+  robots: 'noindex, follow',
 })
 </script>

@@ -18,7 +18,7 @@ export default defineNuxtConfig({
     defaultLocale: "ru",
   },
   robots: {
-    disallow: ["/app", "/app/settings"],
+    disallow: ["/app", "/app/*"],
   },
   runtimeConfig: {
     public: {

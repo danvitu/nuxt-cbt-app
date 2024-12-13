@@ -76,12 +76,10 @@ const showJournalEntriesNumber = ref(false)
 const supabase = useSupabaseClient()
 const { toastError } = useAppToast()
 useSeoMeta({
-  title: "Приложение"
+  title: "Приложение",
+  robots: 'noindex, follow'
 })
-import { useRobotsRule } from '#imports'
 
-const rule = useRobotsRule()
-rule.value = 'noindex, nofollow'
 
 // Загрузка опросов настроения из Supabase
 const { data: moodEntries, refresh: refreshMood, status: statusMood } = await useAsyncData('moods', async () => {
