@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-const negativeEmotions = defineModel('negativeEmotions')
+const negativeEmotions = defineModel('negativeEmotions', { type: Array })
 const toggleEmotion = (groupIndex, emotionName) => {
   const emotion = negativeEmotions.value[groupIndex].emotions.find(e => e.name === emotionName)
   if (emotion) emotion.isSelected = !emotion.isSelected

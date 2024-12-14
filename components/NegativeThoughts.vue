@@ -30,7 +30,7 @@
                   </div>
                 </template>
                 <div class="space-y-4 max-w-xl text-sm">
-                  <div v-for="distortion in distortions">
+                  <div v-for="distortion in distortions" :key="distortion">
                     <div class="font-bold">{{ distortion.distortionName }}</div>
                     <div>{{ distortion.distortionDescription }}</div>
                   </div>
@@ -51,7 +51,8 @@
         <div class="mb-2">Выбранные когнитивные искажения:</div>
         <div class="space-y-2">
           <template v-if="thought.distortionType.length">
-            <div v-for="distortion in thought.distortionType" class="text-sm border px-2 py-1 rounded-md w-max">
+            <div v-for="distortion in thought.distortionType" :key="distortion"
+              class="text-sm border px-2 py-1 rounded-md w-max">
               {{ distortion }}
             </div>
           </template>
@@ -69,17 +70,22 @@
               <UCard>
                 <template #header>
                   <div class="flex justify-between">
-                    <h2 class="font-bold text-xl">40 способов справиться со страхами</h2>
+                    <h2 class="font-bold text-xl">Техники для работы с искажениями в негативных мыслях</h2>
                     <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid"
                       @click="isTechnicsOpen = false" />
                   </div>
                 </template>
                 <div class="max-w-xl text-sm">
-                  <div v-for="model in techniques" class="mb-8 space-y-4">
-                    <h3 class="font-bold text-xl">{{ model.modelName }}</h3>
-                    <div v-for="category in model.categories">
-                      <h3 class="font-semibold">{{ category.categoryName }}</h3>
-                      <div v-for="technique in category.techniques">{{ technique }}</div>
+                  <div v-for="model in techniques" :key="model" class="mb-8 space-y-4">
+                    <h3 class="font-bold text-2xl">{{ model.modelName }}</h3>
+                    <div v-for="category in model.categories" :key="category">
+                      <h3 class="font-semibold text-xl mb-4">{{ category.categoryName }}</h3>
+                      <div v-for="technique in category.techniques" :key="technique" class="mb-2">
+                        <div class="">
+                          <div class="font-semibold">{{ technique.name }}</div>
+                          <div>{{ technique.desc }}</div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -93,12 +99,12 @@
         <UInput v-model.number="thought.confidenceInPositive" type="number" class="w-20" />
       </UFormGroup>
       <div class="flex justify-end">
-        <UButton @click="deleteThought(index)" color="red" variant="outline" icon="i-heroicons-trash" />
+        <UButton color="red" variant="outline" icon="i-heroicons-trash" @click="deleteThought(index)" />
       </div>
     </div>
   </div>
   <div class="border-b mb-4">
-    <UButton @click="addThought" variant="outline" icon="i-heroicons-plus-circle" class="mb-4">Добавить негативную мысль
+    <UButton variant="outline" icon="i-heroicons-plus-circle" class="mb-4" @click="addThought">Добавить негативную мысль
     </UButton>
   </div>
 </template>
@@ -108,7 +114,7 @@ import { techniques, distortions } from '~/constants';
 const distortionOptions = distortions.map((distortion) => distortion.distortionName)
 const isDistortionsOpen = ref(false)
 const isTechnicsOpen = ref(false)
-const negativeThoughts = defineModel('negativeThoughts')
+const negativeThoughts = defineModel('negativeThoughts', { type: Array })
 const addThought = () => {
   negativeThoughts.value.push({
     negativeThought: '',

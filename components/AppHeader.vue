@@ -6,7 +6,8 @@
       <NuxtLink v-if="!user" to="/login">
         <UButton variant="solid">Войти</UButton>
       </NuxtLink>
-      <UDropdown v-if="user" :items="items" :ui="{ item: { disabled: 'cursor-text select-text' }, width: 'w-64' }"
+      <UDropdown
+v-if="user" :items="items" :ui="{ item: { disabled: 'cursor-text select-text' }, width: 'w-64' }"
         :popper="{ placement: 'bottom-start' }">
         <UAvatar src="/images/uifaces-popular-image.jpg" icon="i-heroicons-user-solid" alt="user avatar" />
         <template #account>
@@ -31,8 +32,7 @@
 <script setup>
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
-const { toastSuccess, toastError } = useAppToast()
-const route = useRoute();
+const { toastSuccess } = useAppToast()
 const items = [
   [{
     slot: 'account',

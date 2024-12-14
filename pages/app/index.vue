@@ -6,7 +6,7 @@
           <h2 class="text-2xl"><span class="text-primary">Журнал</span> настроения</h2>
           <div class="flex gap-2 text-xs mt-4">
             <div :class="{ 'opacity-20': showJournalEntriesNumber }">Недавние</div>
-            <UToggle size="sm" v-model="showJournalEntriesNumber" :ui="{ active: 'bg-slate-500 dark:bg-slate-400' }" />
+            <UToggle v-model="showJournalEntriesNumber" size="sm" :ui="{ active: 'bg-slate-500 dark:bg-slate-400' }" />
             <div :class="{ 'opacity-20': !showJournalEntriesNumber }">Все записи</div>
           </div>
         </div>
@@ -21,13 +21,13 @@
         <div class="sm:col-span-4 col-span-3">Запись журнала настроения</div>
       </div>
       <div v-if="statusJournal === 'pending'">
-        <USkeleton class="h-12 w-full py-2 border-b" v-for="i in journalEntries.length" :key="i" />
+        <USkeleton v-for="i in journalEntries.length" :key="i" class="h-12 w-full py-2 border-b" />
       </div>
       <div v-else-if="limitedJournalEntries.length === 0">У вас нет записей в журнале. Нажмите на кнопку "Запись", чтобы
         добавить.
       </div>
       <template v-else>
-        <JournalEntry v-for="journalEntry in limitedJournalEntries" :journalEntry="journalEntry" :key="journalEntry.id"
+        <JournalEntry v-for="journalEntry in limitedJournalEntries" :key="journalEntry.id" :journal-entry="journalEntry"
           @deleted="refreshJournal" @edited="refreshJournal" />
       </template>
     </section>
@@ -38,7 +38,7 @@
           <h2 class="text-2xl"><span class="text-primary">Опрос</span> настроения</h2>
           <div class="flex gap-2 text-xs mt-4">
             <div :class="{ 'opacity-20': showMoodEntriesNumber }">Недавние</div>
-            <UToggle size="sm" :ui="{ active: 'bg-slate-500 dark:bg-slate-400' }" v-model="showMoodEntriesNumber" />
+            <UToggle v-model="showMoodEntriesNumber" size="sm" :ui="{ active: 'bg-slate-500 dark:bg-slate-400' }" />
             <div :class="{ 'opacity-20': !showMoodEntriesNumber }">Все записи</div>
           </div>
         </div>
@@ -56,12 +56,12 @@
         <div class="">Суицидальные импульсы</div>
       </div>
       <template v-if="statusMood === 'pending'">
-        <USkeleton class="h-12 w-full py-2 border-b" v-for="i in moodEntries.length" :key="i" />
+        <USkeleton v-for="i in moodEntries.length" :key="i" class="h-12 w-full py-2 border-b" />
       </template>
       <div v-else-if="moodEntries.length === 0">У вас нет записей в дневнике. Нажмите на кнопку "Опрос", чтобы добавить.
       </div>
       <template v-else>
-        <MoodEntry v-for="moodEntry in limitedMoodEntries" :moodEntry="moodEntry" :key="moodEntry.id"
+        <MoodEntry v-for="moodEntry in limitedMoodEntries" :key="moodEntry.id" :mood-entry="moodEntry"
           @deleted="refreshMood" />
       </template>
     </section>

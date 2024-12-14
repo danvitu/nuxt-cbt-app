@@ -7,7 +7,7 @@
           </NuxtLink>
         </h2>
       </div>
-      <UForm :state="state" :schema="schema" @submit="signInWithPassword" class="space-y-4">
+      <UForm :state="state" :schema="schema" class="space-y-4" @submit="signInWithPassword">
         <UFormGroup label="Email" name="email">
           <UInput v-model="state.email" />
         </UFormGroup>

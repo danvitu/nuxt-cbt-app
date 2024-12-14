@@ -31,79 +31,79 @@
         <div class="mb-8">
           <UDivider class="mb-4" :ui="{ label: 'text-base font-bold' }" label="Тревожные чувства" />
           <UFormGroup :label="`Тревога: ${state.anx[0]}`" class="mb-4">
-            <URange :min="0" :max="4" v-model="state.anx[0]" />
+            <URange v-model="state.anx[0]" :min="0" :max="4" />
           </UFormGroup>
           <UFormGroup :label="`Нервозность: ${state.anx[1]}`" class="mb-4">
-            <URange :min="0" :max="4" v-model="state.anx[1]" />
+            <URange v-model="state.anx[1]" :min="0" :max="4" />
           </UFormGroup>
           <UFormGroup :label="`Беспокойство: ${state.anx[2]}`" class="mb-4">
-            <URange :min="0" :max="4" v-model="state.anx[2]" />
+            <URange v-model="state.anx[2]" :min="0" :max="4" />
           </UFormGroup>
           <UFormGroup :label="`Страх или дурное предчувствие: ${state.anx[3]}`" class="mb-4">
-            <URange :min="0" :max="4" v-model="state.anx[3]" />
+            <URange v-model="state.anx[3]" :min="0" :max="4" />
           </UFormGroup>
           <UFormGroup :label="`Напряжение или состояние на грани: ${state.anx[4]}`" class="mb-4">
-            <URange :min="0" :max="4" v-model="state.anx[4]" />
+            <URange v-model="state.anx[4]" :min="0" :max="4" />
           </UFormGroup>
         </div>
         <div class="mb-8">
           <UDivider class="mb-4" :ui="{ label: 'text-base font-bold' }" label="Физические симптомы тревоги" />
           <UFormGroup :label="`Нерегулярное или учащенное сердцебиение, тахикардия: ${state.phy[0]}`" class="mb-4">
-            <URange :min="0" :max="4" v-model="state.phy[0]" />
+            <URange v-model="state.phy[0]" :min="0" :max="4" />
           </UFormGroup>
           <UFormGroup :label="`Избыточная потливость, приступы холода или жара: ${state.phy[1]}`" class="mb-4">
-            <URange :min="0" :max="4" v-model="state.phy[1]" />
+            <URange v-model="state.phy[1]" :min="0" :max="4" />
           </UFormGroup>
           <UFormGroup :label="`Мелкая или крупная дрожь: ${state.phy[2]}`" class=" mb-4">
-            <URange :min="0" :max="4" v-model="state.phy[2]" />
+            <URange v-model="state.phy[2]" :min="0" :max="4" />
           </UFormGroup>
           <UFormGroup :label="`Одышка или затрудненное дыхание: ${state.phy[3]}`" class="mb-4">
-            <URange :min="0" :max="4" v-model="state.phy[3]" />
+            <URange v-model="state.phy[3]" :min="0" :max="4" />
           </UFormGroup>
           <UFormGroup :label="`Чувство удушья: ${state.phy[4]}`" class="mb-4">
-            <URange :min="0" :max="4" v-model="state.phy[4]" />
+            <URange v-model="state.phy[4]" :min="0" :max="4" />
           </UFormGroup>
           <UFormGroup :label="`Боль или стеснение в груди: ${state.phy[5]} `" class="mb-4">
-            <URange :min="0" :max="4" v-model="state.phy[5]" />
+            <URange v-model="state.phy[5]" :min="0" :max="4" />
           </UFormGroup>
           <UFormGroup :label="`«Бабочки в животе», тошнота, расстройство желудка: ${state.phy[6]}`" class="mb-4">
-            <URange :min="0" :max="4" v-model="state.phy[6]" />
+            <URange v-model="state.phy[6]" :min="0" :max="4" />
           </UFormGroup>
           <UFormGroup :label="`Головокружение, потеря равновесия: ${state.phy[7]}`" class="mb-4">
-            <URange :min="0" :max="4" v-model="state.phy[7]" />
+            <URange v-model="state.phy[7]" :min="0" :max="4" />
           </UFormGroup>
           <UFormGroup :label="`Чувство, как будто вы сами или мир вокруг вас нереальны: ${state.phy[8]}`" class="mb-4">
-            <URange :min="0" :max="4" v-model="state.phy[8]" />
+            <URange v-model="state.phy[8]" :min="0" :max="4" />
           </UFormGroup>
           <UFormGroup :label="`Ощущение онемения или покалывания: ${state.phy[9]}`" class="mb-4">
-            <URange :min="0" :max="4" v-model="state.phy[9]" />
+            <URange v-model="state.phy[9]" :min="0" :max="4" />
           </UFormGroup>
         </div>
         <div class="mb-8">
           <div class="mb-4 font-bold">Депрессия</div>
           <UFormGroup :label="`Грусть или уныние: ${state.dep[0]}`" class="mb-4">
-            <URange :min="0" :max="4" v-model="state.dep[0]" />
+            <URange v-model="state.dep[0]" :min="0" :max="4" />
           </UFormGroup>
           <UFormGroup :label="`Чувство бессилия или безнадежности: ${state.dep[1]}`" class="mb-4">
-            <URange :min="0" :max="4" v-model="state.dep[1]" />
+            <URange v-model="state.dep[1]" :min="0" :max="4" />
           </UFormGroup>
           <UFormGroup :label="`Низкая самооценка: ${state.dep[2]}`" class="mb-4">
-            <URange :min="0" :max="4" v-model="state.dep[2]" />
+            <URange v-model="state.dep[2]" :min="0" :max="4" />
           </UFormGroup>
           <UFormGroup :label="`Чувство собственной никчемности или непригодности: ${state.dep[3]}`" class="mb-4">
-            <URange :min="0" :max="4" v-model="state.dep[3]" />
+            <URange v-model="state.dep[3]" :min="0" :max="4" />
           </UFormGroup>
           <UFormGroup :label="`Потеря чувства удовольствия и удовлетворенности от жизни: ${state.dep[4]}`" class="mb-4">
-            <URange :min="0" :max="4" v-model="state.dep[4]" />
+            <URange v-model="state.dep[4]" :min="0" :max="4" />
           </UFormGroup>
         </div>
         <div class="mb-8">
           <div class="mb-4 font-bold">Суицидальные импульсы</div>
           <UFormGroup :label="`Есть ли у вас суицидальные мысли: ${state.sui[0]}`" class="mb-4">
-            <URange :min="0" :max="4" v-model="state.sui[0]" />
+            <URange v-model="state.sui[0]" :min="0" :max="4" />
           </UFormGroup>
           <UFormGroup :label="`Хотели бы вы покончить с собой: ${state.sui[1]}`" class="mb-4">
-            <URange :min="0" :max="4" v-model="state.sui[1]" />
+            <URange v-model="state.sui[1]" :min="0" :max="4" />
           </UFormGroup>
         </div>
         <UButton type="submit" variant="solid" label="Отправить" :loading="isLoading" />
@@ -114,7 +114,7 @@
 
 <script setup>
 const emit = defineEmits(['saved'])
-const isOpen = defineModel('isOpen')
+const isOpen = defineModel('isOpen', { type: Boolean })
 const supabase = useSupabaseClient()
 const isLoading = ref(false)
 const { toastSuccess, toastError } = useAppToast()

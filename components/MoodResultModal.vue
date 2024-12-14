@@ -7,7 +7,7 @@
           <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" @click="isOpen = false" />
         </div>
       </template>
-      <div v-for="result in totalResult" class="mb-4">
+      <div v-for="result in totalResult" :key="result" class="mb-4">
         <h3 class="font-semibold">{{ result.resultName }}</h3>
         <div>{{ result.resultDescription }}</div>
       </div>
@@ -43,9 +43,13 @@
 <script setup>
 import { moodResults } from '~/constants';
 const props = defineProps({
-  moodEntry: Object,
+  moodEntry:
+  {
+    type: Object,
+    default: () => { }
+  }
 })
-const isOpen = defineModel('isOpen')
+const isOpen = defineModel('isOpen', { type: Boolean })
 
 function getResult(moodResults, points) {
   return moodResults.find(result =>

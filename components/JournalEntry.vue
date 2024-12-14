@@ -3,23 +3,29 @@
     <div class="text-gray-400 md:text-sm text-xs">
       {{ formatDate(journalEntry.created_at) }}
     </div>
-    <div class="sm:col-span-4 col-span-3 cursor-pointer overflow-hidden text-ellipsis line-clamp-2"
+    <div
+class="sm:col-span-4 col-span-3 cursor-pointer overflow-hidden text-ellipsis line-clamp-2"
       @click="isEditJournalOpen = true">
       {{
         journalEntry.upsettingEvent }}
     </div>
     <div class="flex justify-end gap-1">
-      <UButton icon="i-heroicons-pencil-square-20-solid" color="primary" variant="soft" :trailing="false"
+      <UButton
+icon="i-heroicons-pencil-square-20-solid" color="primary" variant="soft" :trailing="false"
         @click="isEditJournalOpen = true" />
-      <UButton icon="i-heroicons-trash-20-solid" color="red" square variant="soft" @click="deleteJournalEntry"
-        :loading="isLoading" />
-      <JournalModal v-model:is-open="isEditJournalOpen" :journalEntry="journalEntry" @saved="emit('edited')" />
+      <UButton
+icon="i-heroicons-trash-20-solid" color="red" square variant="soft" :loading="isLoading"
+        @click="deleteJournalEntry" />
+      <JournalModal v-model:is-open="isEditJournalOpen" :journal-entry="journalEntry" @saved="emit('edited')" />
     </div>
   </div>
 </template>
 <script setup>
 const props = defineProps({
-  journalEntry: Object
+  journalEntry: {
+    type: Object,
+    default: () => { }
+  },
 })
 const emit = defineEmits(['deleted', 'edited'])
 const supabase = useSupabaseClient()

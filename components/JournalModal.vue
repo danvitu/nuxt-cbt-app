@@ -16,7 +16,7 @@
         <UFormGroup
           label="Событие, которое меня расстроило (момент когда почувствовал упадок настроения, беспокойство или панику):"
           name="upsettingEvent" class="mb-6">
-          <UTextarea :rows="2" autoresize v-model="stateJournal.upsettingEvent" />
+          <UTextarea v-model="stateJournal.upsettingEvent" :rows="2" autoresize />
         </UFormGroup>
         <NegativeEmotions v-model:negative-emotions="stateJournal.negativeEmotions" />
         <NegativeThoughts v-model:negative-thoughts="stateJournal.negativeThoughts" />
@@ -33,11 +33,11 @@
 const props = defineProps({
   journalEntry: {
     type: Object,
-    required: false
+    default: () => { }
   }
 })
 const emit = defineEmits(['saved'])
-const isOpen = defineModel('isOpen')
+const isOpen = defineModel('isOpen', { type: Boolean })
 const supabase = useSupabaseClient()
 const { toastSuccess, toastError } = useAppToast()
 const isEditing = computed(() => !!props.journalEntry)

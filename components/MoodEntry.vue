@@ -7,12 +7,14 @@
       <div>{{ moodEntry.depression_sum }}</div>
       <div>{{ suicidalSum }}</div>
       <div class="flex justify-end gap-1">
-        <UButton icon="i-heroicons-eye" color="primary" variant="soft" :trailing="false"
+        <UButton
+icon="i-heroicons-eye" color="primary" variant="soft" :trailing="false"
           @click="isResultModalOpen = true" />
-        <UButton icon="i-heroicons-trash-20-solid" color="red" square variant="soft" @click="deleteEntry"
-          :loading="isLoading" />
+        <UButton
+icon="i-heroicons-trash-20-solid" color="red" square variant="soft" :loading="isLoading"
+          @click="deleteEntry" />
       </div>
-      <MoodResultModal v-model:is-open="isResultModalOpen" :moodEntry="moodEntry" />
+      <MoodResultModal v-model:is-open="isResultModalOpen" :mood-entry="moodEntry" />
     </div>
     <div class="block sm:hidden text-xs text-right text-slate-400">{{ formatDate(moodEntry.created_at) }}</div>
   </div>
@@ -20,7 +22,10 @@
 
 <script setup>
 const props = defineProps({
-  moodEntry: Object
+  moodEntry: {
+    type: Object,
+    default: () => { }
+  }
 })
 const emit = defineEmits(['deleted'])
 const suicidalSum = computed(() => props.moodEntry.suicidal_1 + props.moodEntry.suicidal_2)

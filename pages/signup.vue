@@ -6,7 +6,7 @@
         <h2 class="text-sm">Или <NuxtLink to="/login" class="underline font-semibold">войдите в существующий</NuxtLink>
         </h2>
       </div>
-      <UForm :state="state" :schema="schema" @submit="signUpWithPassword" class="space-y-4">
+      <UForm :state="state" :schema="schema" class="space-y-4" @submit="signUpWithPassword">
         <UFormGroup label="Email" name="email">
           <UInput v-model="state.email" />
         </UFormGroup>
