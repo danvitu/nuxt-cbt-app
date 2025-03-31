@@ -2,7 +2,14 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
-  modules: ["@nuxt/ui", "@nuxtjs/supabase", "@nuxt/image", "@nuxtjs/seo", "@nuxt/eslint"],
+  modules: [
+    "@nuxt/ui",
+    "@nuxtjs/supabase",
+    "@nuxt/image",
+    "@nuxtjs/seo",
+    "@nuxt/eslint",
+    "@vite-pwa/nuxt",
+  ],
   supabase: {
     redirect: true,
     redirectOptions: {

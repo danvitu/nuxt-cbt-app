@@ -17,6 +17,7 @@
     "@nuxt/ui": "^2.20.0",
     "@nuxtjs/seo": "^2.0.2",
     "@nuxtjs/supabase": "^1.4.4",
+    "@vite-pwa/nuxt": "^1.0.0",
     "nuxt": "^3.14.1592",
     "vue": "latest",
     "vue-router": "latest"
