@@ -10,6 +10,9 @@ export default defineNuxtConfig({
     "@nuxt/eslint",
     "@vite-pwa/nuxt",
   ],
+  pwa: {
+    /* PWA options */
+  },
   supabase: {
     redirect: true,
     redirectOptions: {
@@ -32,4 +35,4 @@ export default defineNuxtConfig({
       baseUrl: process.env.BASE_URL ?? "http://localhost:3000",
     },
   },
-})
+});
